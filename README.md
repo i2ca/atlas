@@ -9,3 +9,5 @@ Aqui tem links para alguns arquivos relevantes e externos a esse repositório.
 [Arquitetura empilhadeira](https://docs.google.com/document/d/1DRTnFhYwnWLq7EVtPsV6S9Zs3U3_auDTrfh28rF90ys/edit?usp=sharing)
 
 [Pasta com esses documentos e outros](https://drive.google.com/drive/folders/1mXUgr71WuXcAZGgUDbi8FAVjAQary5Ly?usp=sharing)
+
+[Pasta com vídeos e imagens](https://drive.google.com/drive/folders/1pGpaAzjvP5k_cH8VDoe4cQisD2lMXWv8?usp=drive_link)

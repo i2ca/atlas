@@ -27,9 +27,9 @@
 
 <link name="Base_das_garras_1">
   <inertial>
-    <origin xyz="-1.0174100000000024 -0.09813662697467929 -0.08426486939489086" rpy="0 0 0"/>
+    <origin xyz="-1.0174100000000017 -0.0981366269746784 -0.08426486939488775" rpy="0 0 0"/>
     <mass value="1588.2579982955185"/>
-    <inertia ixx="151.93722" iyy="421.827021" izz="286.662272" ixy="0.0" iyz="-5.908384" ixz="0.0"/>
+    <inertia ixx="151.93722" iyy="421.827021" izz="286.662272" ixy="-0.0" iyz="-5.908384" ixz="0.0"/>
   </inertial>
   <visual>
     <origin xyz="-1.01632 -0.616947 -3.972451" rpy="0 0 0"/>
@@ -48,7 +48,7 @@
 
 <link name="3._Frame_-_2_1">
   <inertial>
-    <origin xyz="1.4162614780635592 -4.987760374523983 0.7954257791514285" rpy="0 0 0"/>
+    <origin xyz="1.4162614780635594 -4.987760374523981 0.7954257791514321" rpy="0 0 0"/>
     <mass value="274.26551036234616"/>
     <inertia ixx="371.186685" iyy="406.150315" izz="40.184754" ixy="-0.002197" iyz="-7.886965" ixz="0.003937"/>
   </inertial>
@@ -69,7 +69,7 @@
 
 <link name="Frame_1_1">
   <inertial>
-    <origin xyz="0.4523535861969996 -0.07575010556847994 2.137034553714616" rpy="0 0 0"/>
+    <origin xyz="0.45235358619699945 -0.07575010556847905 2.1370345537146167" rpy="0 0 0"/>
     <mass value="786.0759725054191"/>
     <inertia ixx="838.620131" iyy="958.544532" izz="141.548426" ixy="0.206413" iyz="-37.464087" ixz="-0.034091"/>
   </inertial>
@@ -90,7 +90,7 @@
 
 <link name="Base_deslizante_1">
   <inertial>
-    <origin xyz="0.0005899998492178037 -0.7809302774388632 -5.5284007558560315" rpy="0 0 0"/>
+    <origin xyz="0.0005899998492182473 -0.7809302774388625 -5.52840075585603" rpy="0 0 0"/>
     <mass value="611.9992875961477"/>
     <inertia ixx="100.566337" iyy="306.612743" izz="212.604119" ixy="-0.0" iyz="0.482863" ixz="-0.0"/>
   </inertial>
@@ -111,7 +111,7 @@
 
 <link name="Left_front_wheel_1">
   <inertial>
-    <origin xyz="-0.3141501086785135 -3.5293322264706717e-07 1.2163996072622751e-06" rpy="0 0 0"/>
+    <origin xyz="-0.3141501086785135 -3.5293322264706717e-07 1.2163996063740967e-06" rpy="0 0 0"/>
     <mass value="1255.0748898156764"/>
     <inertia ixx="106.011711" iyy="70.775652" izz="70.775518" ixy="0.000114" iyz="7.7e-05" ixz="0.0001"/>
   </inertial>
@@ -132,8 +132,8 @@
 
 <link name="Right_front_wheel_1">
   <inertial>
-    <origin xyz="0.31415737290690954 8.302154363981629e-08 1.8685303437848688e-07" rpy="0 0 0"/>
-    <mass value="1255.245028420145"/>
+    <origin xyz="0.31415737290690954 8.302154363981629e-08 1.8685303393439767e-07" rpy="0 0 0"/>
+    <mass value="1255.2450284201448"/>
     <inertia ixx="106.013616" iyy="70.776839" izz="70.776864" ixy="-4.4e-05" iyz="-3.9e-05" ixz="9e-06"/>
   </inertial>
   <visual>
@@ -153,8 +153,8 @@
 
 <link name="Left_rear_wheel_1">
   <inertial>
-    <origin xyz="-0.11874149685492552 -7.711468974491709e-08 -1.374510847362842e-07" rpy="0 0 0"/>
-    <mass value="572.9237330542088"/>
+    <origin xyz="-0.11874149685492574 -7.711468930082788e-08 -1.374510847362842e-07" rpy="0 0 0"/>
+    <mass value="572.9237330542089"/>
     <inertia ixx="52.533082" iyy="27.997105" izz="27.99706" ixy="-3e-06" iyz="-9e-06" ixz="-4e-06"/>
   </inertial>
   <visual>
@@ -235,51 +235,9 @@
   </collision>
 </link>
 
-<link name="9.Left__Rear_Hub_Link2_1">
-  <inertial>
-    <origin xyz="-0.06465440386255417 -0.07427932447853802 1.0470821454333645e-07" rpy="0 0 0"/>
-    <mass value="2.52226264494761"/>
-    <inertia ixx="0.007635" iyy="0.003856" izz="0.010642" ixy="-0.004229" iyz="-0.0" ixz="-0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.632 -3.255433 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/9.Left__Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.632 -3.255433 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/9.Left__Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="18._Steering_Rod_1">
-  <inertial>
-    <origin xyz="-0.5259069999999999 2.427863603493563e-07 1.047079281057961e-07" rpy="0 0 0"/>
-    <mass value="14.847302509530245"/>
-    <inertia ixx="0.004403" iyy="1.549952" izz="1.55009" ixy="0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
 <link name="Garra_1_1">
   <inertial>
-    <origin xyz="0.2531409183077028 -0.3499648342074563 -0.4163759926410773" rpy="0 0 0"/>
+    <origin xyz="0.25314091830770374 -0.34996483420745594 -0.41637599264107417" rpy="0 0 0"/>
     <mass value="980.1329836469724"/>
     <inertia ixx="237.854536" iyy="187.973293" izz="244.401542" ixy="-64.814959" iyz="-53.91832" ixz="-31.272353"/>
   </inertial>
@@ -300,7 +258,7 @@
 
 <link name="Garra_2_1">
   <inertial>
-    <origin xyz="-0.2531499051288758 -0.3499413415582673 0.2701843477563979" rpy="0 0 0"/>
+    <origin xyz="-0.2531499051288749 -0.3499413415582662 0.2701843477564001" rpy="0 0 0"/>
     <mass value="980.059358014733"/>
     <inertia ixx="221.549361" iyy="171.683869" izz="244.376384" ixy="64.809121" iyz="-19.970136" ixz="0.01832"/>
   </inertial>
@@ -315,69 +273,6 @@
     <origin xyz="-0.72391 -0.45169 -3.45807" rpy="0 0 0"/>
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Garra_2_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="9._Rear_Hub_Link_1">
-  <inertial>
-    <origin xyz="0.06465440386262777 -0.07427932447862329 1.0470818834207307e-07" rpy="0 0 0"/>
-    <mass value="2.5222626449475882"/>
-    <inertia ixx="0.007635" iyy="0.003856" izz="0.010642" ixy="0.004229" iyz="0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.632 -3.255433 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.632 -3.255433 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="14._Cylinder_-_1_12_1">
-  <inertial>
-    <origin xyz="-1.058252774678441 -1.1510406389160184 -3.1792992778082754" rpy="0 0 0"/>
-    <mass value="5.712254750827908"/>
-    <inertia ixx="0.156943" iyy="0.050577" izz="0.107535" ixy="-3e-06" iyz="0.072448" ixz="2e-06"/>
-  </inertial>
-  <visual>
-    <origin xyz="-1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/14._Cylinder_-_1_12_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/14._Cylinder_-_1_12_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="16._Cylinder_-_1_1_1">
-  <inertial>
-    <origin xyz="1.0582373068717938 -1.1511464996763692 -3.1792271454069816" rpy="0 0 0"/>
-    <mass value="5.715164808102922"/>
-    <inertia ixx="0.157127" iyy="0.050638" izz="0.107664" ixy="-1.5e-05" iyz="0.072534" ixz="1e-05"/>
-  </inertial>
-  <visual>
-    <origin xyz="1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/16._Cylinder_-_1_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/16._Cylinder_-_1_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -403,27 +298,6 @@
   </collision>
 </link>
 
-<link name="Frame_1_1">
-  <inertial>
-    <origin xyz="-0.5568064138030003 0.19755089443152019 0.9170345537146156" rpy="0 0 0"/>
-    <mass value="786.0759725054191"/>
-    <inertia ixx="838.620131" iyy="958.544532" izz="141.548426" ixy="0.206413" iyz="-37.464087" ixz="-0.034091"/>
-  </inertial>
-  <visual>
-    <origin xyz="-0.55741 -0.832132 -4.33971" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="-0.55741 -0.832132 -4.33971" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
 <link name="15._Cylinder_-_1_1__1">
   <inertial>
     <origin xyz="-1.1102230246251565e-16 -0.19411720247652253 0.13227000062782102" rpy="0 0 0"/>
@@ -445,48 +319,6 @@
   </collision>
 </link>
 
-<link name="Frame_1_1">
-  <inertial>
-    <origin xyz="0.5591935861969997 0.19755089443152019 0.9170345537146156" rpy="0 0 0"/>
-    <mass value="786.0759725054191"/>
-    <inertia ixx="838.620131" iyy="958.544532" izz="141.548426" ixy="0.206413" iyz="-37.464087" ixz="-0.034091"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.55859 -0.832132 -4.33971" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.55859 -0.832132 -4.33971" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
-<link name="18._Steering_Rod_1">
-  <inertial>
-    <origin xyz="0.5259070000000001 2.427863603493563e-07 1.047079281057961e-07" rpy="0 0 0"/>
-    <mass value="14.847302509530245"/>
-    <inertia ixx="0.004403" iyy="1.549952" izz="1.55009" ixy="0.0" iyz="-0.0" ixz="0.0"/>
-  </inertial>
-  <visual>
-    <origin xyz="0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-    <material name="silver"/>
-  </visual>
-  <collision>
-    <origin xyz="0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
-</link>
-
 <joint name="Rigid 3" type="fixed">
   <origin xyz="1.0175 -0.837985 -5.348533" rpy="0 0 0"/>
   <parent link="Base_deslizante_1"/>
@@ -494,15 +326,15 @@
 </joint>
 
 <joint name="Slider 4" type="prismatic">
-  <origin xyz="-0.858183 5.075003 0.03027" rpy="0 0 0"/>
+  <origin xyz="-0.965023 4.801702 1.25027" rpy="0 0 0"/>
   <parent link="Frame_1_1"/>
   <child link="3._Frame_-_2_1"/>
-  <axis xyz="-0.0 -0.0 1.0"/>
+  <axis xyz="0.0 -0.0 1.0"/>
   <limit upper="2.65" lower="-0.22" effort="100" velocity="100"/>
 </joint>
 
 <joint name="Revolute 5" type="revolute">
-  <origin xyz="-0.55859 0.832132 4.33971" rpy="0 0 0"/>
+  <origin xyz="-0.45175 1.105433 3.11971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Frame_1_1"/>
   <axis xyz="-1.0 0.0 0.0"/>
@@ -561,25 +393,11 @@
   <limit upper="0.261799" lower="-0.349066" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolute 37" type="continuous">
-  <origin xyz="0.025 -0.15 -0.115" rpy="0 0 0"/>
-  <parent link="10.Right__Hub_1"/>
-  <child link="9.Left__Rear_Hub_Link2_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
-<joint name="Revolute 38" type="continuous">
-  <origin xyz="-1.157907 -0.163613 0.0" rpy="0 0 0"/>
-  <parent link="9.Left__Rear_Hub_Link2_1"/>
-  <child link="18._Steering_Rod_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
-</joint>
-
 <joint name="Slider 41" type="prismatic">
   <origin xyz="-1.74241 -0.165257 0.285619" rpy="0 0 0"/>
   <parent link="Base_das_garras_1"/>
   <child link="Garra_1_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
   <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
@@ -587,30 +405,7 @@
   <origin xyz="-0.29241 -0.165257 -0.514381" rpy="0 0 0"/>
   <parent link="Base_das_garras_1"/>
   <child link="Garra_2_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
-  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
-</joint>
-
-<joint name="Revolute 45" type="continuous">
-  <origin xyz="-0.025 -0.15 -0.115" rpy="0 0 0"/>
-  <parent link="10._Left_Hub2_1"/>
-  <child link="9._Rear_Hub_Link_1"/>
-  <axis xyz="0.0 -0.0 1.0"/>
-</joint>
-
-<joint name="Slider 48" type="prismatic">
-  <origin xyz="1.05825 0.765082 3.442288" rpy="0 0 0"/>
-  <parent link="13._Cylinder_-_1_1_2_1"/>
-  <child link="14._Cylinder_-_1_12_1"/>
-  <axis xyz="0.0 -0.826392 0.563095"/>
-  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
-</joint>
-
-<joint name="Slider 49" type="prismatic">
-  <origin xyz="-1.05825 0.765082 3.442288" rpy="0 0 0"/>
-  <parent link="15._Cylinder_-_1_1__1"/>
-  <child link="16._Cylinder_-_1_1_1"/>
-  <axis xyz="-0.0 -0.826392 0.563095"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
   <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
@@ -621,32 +416,11 @@
   <axis xyz="-1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolute 51" type="continuous">
-  <origin xyz="-2.144465 -1.358944 -3.037636" rpy="0 0 0"/>
-  <parent link="14._Cylinder_-_1_12_1"/>
-  <child link="Frame_1_1"/>
-  <axis xyz="-1.0 -0.0 0.0"/>
-</joint>
-
 <joint name="Revolute 52" type="continuous">
   <origin xyz="-0.527625 1.425994 3.935058" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="15._Cylinder_-_1_1__1"/>
   <axis xyz="1.0 0.0 0.0"/>
-</joint>
-
-<joint name="Revolute 53" type="continuous">
-  <origin xyz="1.027285 -1.358944 -3.037636" rpy="0 0 0"/>
-  <parent link="16._Cylinder_-_1_1_1"/>
-  <child link="Frame_1_1"/>
-  <axis xyz="1.0 -0.0 -0.0"/>
-</joint>
-
-<joint name="Revolute 55" type="continuous">
-  <origin xyz="0.106093 -0.163613 0.0" rpy="0 0 0"/>
-  <parent link="9._Rear_Hub_Link_1"/>
-  <child link="18._Steering_Rod_1"/>
-  <axis xyz="0.0 0.0 -1.0"/>
 </joint>
 
 </robot>

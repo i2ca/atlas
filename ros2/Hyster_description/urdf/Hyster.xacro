@@ -1,0 +1,652 @@
+<?xml version="1.0" ?>
+<robot name="Hyster" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find Hyster_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find Hyster_description)/urdf/Hyster.trans" />
+<xacro:include filename="$(find Hyster_description)/urdf/Hyster.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0004925789832203201 2.4769998313137425 3.690590684581383" rpy="0 0 0"/>
+    <mass value="23179.86410500836"/>
+    <inertia ixx="15802.894967" iyy="6615.204083" izz="15731.294384" ixy="-5.906617" iyz="-417.72686" ixz="-7.661882"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Base_das_garras_1">
+  <inertial>
+    <origin xyz="-1.0174100000000024 -0.09813662697467929 -0.08426486939489086" rpy="0 0 0"/>
+    <mass value="1588.2579982955185"/>
+    <inertia ixx="151.93722" iyy="421.827021" izz="286.662272" ixy="0.0" iyz="-5.908384" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-1.01632 -0.616947 -3.972451" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Base_das_garras_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-1.01632 -0.616947 -3.972451" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Base_das_garras_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="3._Frame_-_2_1">
+  <inertial>
+    <origin xyz="1.4162614780635592 -4.987760374523983 0.7954257791514285" rpy="0 0 0"/>
+    <mass value="274.26551036234616"/>
+    <inertia ixx="371.186685" iyy="406.150315" izz="40.184754" ixy="-0.002197" iyz="-7.886965" ixz="0.003937"/>
+  </inertial>
+  <visual>
+    <origin xyz="1.416773 -5.907135 -4.36998" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/3._Frame_-_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="1.416773 -5.907135 -4.36998" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/3._Frame_-_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Frame_1_1">
+  <inertial>
+    <origin xyz="0.4523535861969996 -0.07575010556847994 2.137034553714616" rpy="0 0 0"/>
+    <mass value="786.0759725054191"/>
+    <inertia ixx="838.620131" iyy="958.544532" izz="141.548426" ixy="0.206413" iyz="-37.464087" ixz="-0.034091"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.45175 -1.105433 -3.11971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.45175 -1.105433 -3.11971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Base_deslizante_1">
+  <inertial>
+    <origin xyz="0.0005899998492178037 -0.7809302774388632 -5.5284007558560315" rpy="0 0 0"/>
+    <mass value="611.9992875961477"/>
+    <inertia ixx="100.566337" iyy="306.612743" izz="212.604119" ixy="-0.0" iyz="0.482863" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.00118 -1.454932 -9.320984" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Base_deslizante_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.00118 -1.454932 -9.320984" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Base_deslizante_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Left_front_wheel_1">
+  <inertial>
+    <origin xyz="-0.3141501086785135 -3.5293322264706717e-07 1.2163996072622751e-06" rpy="0 0 0"/>
+    <mass value="1255.0748898156764"/>
+    <inertia ixx="106.011711" iyy="70.775652" izz="70.775518" ixy="0.000114" iyz="7.7e-05" ixz="0.0001"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.4705 -1.170433 -3.26971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Left_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.4705 -1.170433 -3.26971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Left_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Right_front_wheel_1">
+  <inertial>
+    <origin xyz="0.31415737290690954 8.302154363981629e-08 1.8685303437848688e-07" rpy="0 0 0"/>
+    <mass value="1255.245028420145"/>
+    <inertia ixx="106.013616" iyy="70.776839" izz="70.776864" ixy="-4.4e-05" iyz="-3.9e-05" ixz="9e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.4705 -1.170433 -3.26971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Right_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.4705 -1.170433 -3.26971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Right_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Left_rear_wheel_1">
+  <inertial>
+    <origin xyz="-0.11874149685492552 -7.711468974491709e-08 -1.374510847362842e-07" rpy="0 0 0"/>
+    <mass value="572.9237330542088"/>
+    <inertia ixx="52.533082" iyy="27.997105" izz="27.99706" ixy="-3e-06" iyz="-9e-06" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.777 -3.405433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Left_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.777 -3.405433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Left_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Right_rear_wheel_1">
+  <inertial>
+    <origin xyz="0.11874147941052993 1.0383174187111877e-07 1.681661996322248e-07" rpy="0 0 0"/>
+    <mass value="572.9262498031871"/>
+    <inertia ixx="52.533409" iyy="27.997252" izz="27.997262" ixy="-6e-06" iyz="-7e-06" ixz="2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.777 -3.405433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Right_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.777 -3.405433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Right_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="10.Right__Hub_1">
+  <inertial>
+    <origin xyz="0.10676222612247532 -0.001134425302500297 -0.11416074168174717" rpy="0 0 0"/>
+    <mass value="74.42878224447517"/>
+    <inertia ixx="0.917356" iyy="0.631169" izz="0.619987" ixy="-0.007037" iyz="-7.1e-05" ixz="0.006668"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.607 -3.405433 -3.37921" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/10.Right__Hub_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.607 -3.405433 -3.37921" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/10.Right__Hub_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="10._Left_Hub2_1">
+  <inertial>
+    <origin xyz="-0.10676222612247543 -0.001134425302500297 -0.11416074168174717" rpy="0 0 0"/>
+    <mass value="74.42878224447499"/>
+    <inertia ixx="0.917356" iyy="0.631169" izz="0.619987" ixy="0.007037" iyz="-7.1e-05" ixz="-0.006668"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.607 -3.405433 -3.37921" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/10._Left_Hub2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.607 -3.405433 -3.37921" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/10._Left_Hub2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="9._Rear_Hub_Link2_1">
+  <inertial>
+    <origin xyz="-0.06465440386255417 -0.07427932447853802 1.0470821454333645e-07" rpy="0 0 0"/>
+    <mass value="2.52226264494761"/>
+    <inertia ixx="0.007635" iyy="0.003856" izz="0.010642" ixy="-0.004229" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.632 -3.255433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.632 -3.255433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="18._Steering_Rod_1">
+  <inertial>
+    <origin xyz="-0.5259069999999999 2.427863603493563e-07 1.047079281057961e-07" rpy="0 0 0"/>
+    <mass value="14.847302509530245"/>
+    <inertia ixx="0.004403" iyy="1.549952" izz="1.55009" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Garra_1_1">
+  <inertial>
+    <origin xyz="0.2531409183077028 -0.3499648342074563 -0.4163759926410773" rpy="0 0 0"/>
+    <mass value="980.1329836469724"/>
+    <inertia ixx="237.854536" iyy="187.973293" izz="244.401542" ixy="-64.814959" iyz="-53.91832" ixz="-31.272353"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.72609 -0.45169 -4.25807" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Garra_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.72609 -0.45169 -4.25807" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Garra_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Garra_2_1">
+  <inertial>
+    <origin xyz="-0.2531499051288758 -0.3499413415582673 0.2701843477563979" rpy="0 0 0"/>
+    <mass value="980.059358014733"/>
+    <inertia ixx="221.549361" iyy="171.683869" izz="244.376384" ixy="64.809121" iyz="-19.970136" ixz="0.01832"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.72391 -0.45169 -3.45807" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Garra_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.72391 -0.45169 -3.45807" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Garra_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="9._Rear_Hub_Link_1">
+  <inertial>
+    <origin xyz="0.06465440386262777 -0.07427932447862329 1.0470818834207307e-07" rpy="0 0 0"/>
+    <mass value="2.5222626449475882"/>
+    <inertia ixx="0.007635" iyy="0.003856" izz="0.010642" ixy="0.004229" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.632 -3.255433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.632 -3.255433 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="14._Cylinder_-_1_12_1">
+  <inertial>
+    <origin xyz="-1.058252774678441 -1.1510406389160184 -3.1792992778082754" rpy="0 0 0"/>
+    <mass value="5.712254750827908"/>
+    <inertia ixx="0.156943" iyy="0.050577" izz="0.107535" ixy="-3e-06" iyz="0.072448" ixz="2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/14._Cylinder_-_1_12_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/14._Cylinder_-_1_12_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="16._Cylinder_-_1_1_1">
+  <inertial>
+    <origin xyz="1.0582373068717938 -1.1511464996763692 -3.1792271454069816" rpy="0 0 0"/>
+    <mass value="5.715164808102922"/>
+    <inertia ixx="0.157127" iyy="0.050638" izz="0.107664" ixy="-1.5e-05" iyz="0.072534" ixz="1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/16._Cylinder_-_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="1.585875 -2.191076 -7.377346" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/16._Cylinder_-_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="13._Cylinder_-_1_1_2_1">
+  <inertial>
+    <origin xyz="2.220446049250313e-16 -0.19411720247653874 0.13227000062779704" rpy="0 0 0"/>
+    <mass value="21.72488855838382"/>
+    <inertia ixx="0.337856" iyy="0.127821" izz="0.24018" ixy="0.0" iyz="0.142914" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.527625 -1.425994 -3.935058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/13._Cylinder_-_1_1_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.527625 -1.425994 -3.935058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/13._Cylinder_-_1_1_2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Frame_1_1">
+  <inertial>
+    <origin xyz="-0.5568064138030003 0.19755089443152019 0.9170345537146156" rpy="0 0 0"/>
+    <mass value="786.0759725054191"/>
+    <inertia ixx="838.620131" iyy="958.544532" izz="141.548426" ixy="0.206413" iyz="-37.464087" ixz="-0.034091"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.55741 -0.832132 -4.33971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.55741 -0.832132 -4.33971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="15._Cylinder_-_1_1__1">
+  <inertial>
+    <origin xyz="-1.1102230246251565e-16 -0.19411720247652253 0.13227000062782102" rpy="0 0 0"/>
+    <mass value="21.72488855838382"/>
+    <inertia ixx="0.337856" iyy="0.127821" izz="0.24018" ixy="-0.0" iyz="0.142914" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.527625 -1.425994 -3.935058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/15._Cylinder_-_1_1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.527625 -1.425994 -3.935058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/15._Cylinder_-_1_1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Frame_1_1">
+  <inertial>
+    <origin xyz="0.5591935861969997 0.19755089443152019 0.9170345537146156" rpy="0 0 0"/>
+    <mass value="786.0759725054191"/>
+    <inertia ixx="838.620131" iyy="958.544532" izz="141.548426" ixy="0.206413" iyz="-37.464087" ixz="-0.034091"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.55859 -0.832132 -4.33971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.55859 -0.832132 -4.33971" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="18._Steering_Rod_1">
+  <inertial>
+    <origin xyz="0.5259070000000001 2.427863603493563e-07 1.047079281057961e-07" rpy="0 0 0"/>
+    <mass value="14.847302509530245"/>
+    <inertia ixx="0.004403" iyy="1.549952" izz="1.55009" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.525907 -3.09182 -3.26421" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find Hyster_description)/meshes/18._Steering_Rod_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rígido 3" type="fixed">
+  <origin xyz="1.0175 -0.837985 -5.348533" rpy="0 0 0"/>
+  <parent link="Base_deslizante_1"/>
+  <child link="Base_das_garras_1"/>
+</joint>
+
+<joint name="Deslizador 4" type="prismatic">
+  <origin xyz="-0.858183 5.075003 0.03027" rpy="0 0 0"/>
+  <parent link="Frame_1_1"/>
+  <child link="3._Frame_-_2_1"/>
+  <axis xyz="-0.0 -0.0 1.0"/>
+  <limit upper="2.65" lower="-0.22" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolucionar 5" type="revolute">
+  <origin xyz="-0.55859 0.832132 4.33971" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Frame_1_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit upper="0.174533" lower="-0.087266" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Deslizador 10" type="prismatic">
+  <origin xyz="1.415593 -4.452203 4.951004" rpy="0 0 0"/>
+  <parent link="3._Frame_-_2_1"/>
+  <child link="Base_deslizante_1"/>
+  <axis xyz="-0.0 0.0 -1.0"/>
+  <limit upper="0.25" lower="-2.3" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolucionar 11" type="continuous">
+  <origin xyz="-0.4705 1.170433 3.26971" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Left_front_wheel_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolucionar 12" type="continuous">
+  <origin xyz="0.4705 1.170433 3.26971" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Right_front_wheel_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolucionar 13" type="continuous">
+  <origin xyz="-0.17 0.0 -0.115" rpy="0 0 0"/>
+  <parent link="10._Left_Hub2_1"/>
+  <child link="Left_rear_wheel_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Revolucionar 16" type="continuous">
+  <origin xyz="0.17 0.0 -0.115" rpy="0 0 0"/>
+  <parent link="10.Right__Hub_1"/>
+  <child link="Right_rear_wheel_1"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Revolucionar 35" type="revolute">
+  <origin xyz="0.607 3.405433 3.37921" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="10.Right__Hub_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="0.349066" lower="-0.261799" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolucionar 36" type="revolute">
+  <origin xyz="-0.607 3.405433 3.37921" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="10._Left_Hub2_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="0.261799" lower="-0.349066" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolucionar 37" type="continuous">
+  <origin xyz="0.025 -0.15 -0.115" rpy="0 0 0"/>
+  <parent link="10.Right__Hub_1"/>
+  <child link="9._Rear_Hub_Link2_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<joint name="Revolucionar 38" type="continuous">
+  <origin xyz="-1.157907 -0.163613 0.0" rpy="0 0 0"/>
+  <parent link="9._Rear_Hub_Link2_1"/>
+  <child link="18._Steering_Rod_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<joint name="Deslizador 41" type="prismatic">
+  <origin xyz="-1.74241 -0.165257 0.285619" rpy="0 0 0"/>
+  <parent link="Base_das_garras_1"/>
+  <child link="Garra_1_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Deslizador 42" type="prismatic">
+  <origin xyz="-0.29241 -0.165257 -0.514381" rpy="0 0 0"/>
+  <parent link="Base_das_garras_1"/>
+  <child link="Garra_2_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolucionar 45" type="continuous">
+  <origin xyz="-0.025 -0.15 -0.115" rpy="0 0 0"/>
+  <parent link="10._Left_Hub2_1"/>
+  <child link="9._Rear_Hub_Link_1"/>
+  <axis xyz="0.0 -0.0 1.0"/>
+</joint>
+
+<joint name="Deslizador 48" type="prismatic">
+  <origin xyz="1.05825 0.765082 3.442288" rpy="0 0 0"/>
+  <parent link="13._Cylinder_-_1_1_2_1"/>
+  <child link="14._Cylinder_-_1_12_1"/>
+  <axis xyz="0.0 -0.826392 0.563095"/>
+  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Deslizador 49" type="prismatic">
+  <origin xyz="-1.05825 0.765082 3.442288" rpy="0 0 0"/>
+  <parent link="15._Cylinder_-_1_1__1"/>
+  <child link="16._Cylinder_-_1_1_1"/>
+  <axis xyz="-0.0 -0.826392 0.563095"/>
+  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Revolucionar 50" type="continuous">
+  <origin xyz="0.527625 1.425994 3.935058" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="13._Cylinder_-_1_1_2_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolucionar 51" type="continuous">
+  <origin xyz="-2.144465 -1.358944 -3.037636" rpy="0 0 0"/>
+  <parent link="14._Cylinder_-_1_12_1"/>
+  <child link="Frame_1_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Revolucionar 52" type="continuous">
+  <origin xyz="-0.527625 1.425994 3.935058" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="15._Cylinder_-_1_1__1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Revolucionar 53" type="continuous">
+  <origin xyz="1.027285 -1.358944 -3.037636" rpy="0 0 0"/>
+  <parent link="16._Cylinder_-_1_1_1"/>
+  <child link="Frame_1_1"/>
+  <axis xyz="1.0 -0.0 -0.0"/>
+</joint>
+
+<joint name="Revolucionar 55" type="continuous">
+  <origin xyz="0.106093 -0.163613 0.0" rpy="0 0 0"/>
+  <parent link="9._Rear_Hub_Link_1"/>
+  <child link="18._Steering_Rod_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+</robot>

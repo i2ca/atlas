@@ -235,7 +235,7 @@
   </collision>
 </link>
 
-<link name="9._Rear_Hub_Link2_1">
+<link name="9.Left__Rear_Hub_Link2_1">
   <inertial>
     <origin xyz="-0.06465440386255417 -0.07427932447853802 1.0470821454333645e-07" rpy="0 0 0"/>
     <mass value="2.52226264494761"/>
@@ -244,14 +244,14 @@
   <visual>
     <origin xyz="-0.632 -3.255433 -3.26421" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find Hyster_description)/meshes/9.Left__Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.632 -3.255433 -3.26421" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/9._Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find Hyster_description)/meshes/9.Left__Rear_Hub_Link2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -487,13 +487,13 @@
   </collision>
 </link>
 
-<joint name="Rígido 3" type="fixed">
+<joint name="Rigid 3" type="fixed">
   <origin xyz="1.0175 -0.837985 -5.348533" rpy="0 0 0"/>
   <parent link="Base_deslizante_1"/>
   <child link="Base_das_garras_1"/>
 </joint>
 
-<joint name="Deslizador 4" type="prismatic">
+<joint name="Slider 4" type="prismatic">
   <origin xyz="-0.858183 5.075003 0.03027" rpy="0 0 0"/>
   <parent link="Frame_1_1"/>
   <child link="3._Frame_-_2_1"/>
@@ -501,7 +501,7 @@
   <limit upper="2.65" lower="-0.22" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolucionar 5" type="revolute">
+<joint name="Revolute 5" type="revolute">
   <origin xyz="-0.55859 0.832132 4.33971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Frame_1_1"/>
@@ -509,7 +509,7 @@
   <limit upper="0.174533" lower="-0.087266" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Deslizador 10" type="prismatic">
+<joint name="Slider 10" type="prismatic">
   <origin xyz="1.415593 -4.452203 4.951004" rpy="0 0 0"/>
   <parent link="3._Frame_-_2_1"/>
   <child link="Base_deslizante_1"/>
@@ -517,35 +517,35 @@
   <limit upper="0.25" lower="-2.3" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolucionar 11" type="continuous">
+<joint name="Revolute 11" type="continuous">
   <origin xyz="-0.4705 1.170433 3.26971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Left_front_wheel_1"/>
   <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolucionar 12" type="continuous">
+<joint name="Revolute 12" type="continuous">
   <origin xyz="0.4705 1.170433 3.26971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Right_front_wheel_1"/>
   <axis xyz="-1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolucionar 13" type="continuous">
+<joint name="Revolute 13" type="continuous">
   <origin xyz="-0.17 0.0 -0.115" rpy="0 0 0"/>
   <parent link="10._Left_Hub2_1"/>
   <child link="Left_rear_wheel_1"/>
   <axis xyz="-1.0 0.0 -0.0"/>
 </joint>
 
-<joint name="Revolucionar 16" type="continuous">
+<joint name="Revolute 16" type="continuous">
   <origin xyz="0.17 0.0 -0.115" rpy="0 0 0"/>
   <parent link="10.Right__Hub_1"/>
   <child link="Right_rear_wheel_1"/>
   <axis xyz="1.0 -0.0 0.0"/>
 </joint>
 
-<joint name="Revolucionar 35" type="revolute">
+<joint name="Revolute 35" type="revolute">
   <origin xyz="0.607 3.405433 3.37921" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="10.Right__Hub_1"/>
@@ -553,7 +553,7 @@
   <limit upper="0.349066" lower="-0.261799" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolucionar 36" type="revolute">
+<joint name="Revolute 36" type="revolute">
   <origin xyz="-0.607 3.405433 3.37921" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="10._Left_Hub2_1"/>
@@ -561,21 +561,21 @@
   <limit upper="0.261799" lower="-0.349066" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolucionar 37" type="continuous">
+<joint name="Revolute 37" type="continuous">
   <origin xyz="0.025 -0.15 -0.115" rpy="0 0 0"/>
   <parent link="10.Right__Hub_1"/>
-  <child link="9._Rear_Hub_Link2_1"/>
+  <child link="9.Left__Rear_Hub_Link2_1"/>
   <axis xyz="0.0 0.0 -1.0"/>
 </joint>
 
-<joint name="Revolucionar 38" type="continuous">
+<joint name="Revolute 38" type="continuous">
   <origin xyz="-1.157907 -0.163613 0.0" rpy="0 0 0"/>
-  <parent link="9._Rear_Hub_Link2_1"/>
+  <parent link="9.Left__Rear_Hub_Link2_1"/>
   <child link="18._Steering_Rod_1"/>
   <axis xyz="0.0 0.0 -1.0"/>
 </joint>
 
-<joint name="Deslizador 41" type="prismatic">
+<joint name="Slider 41" type="prismatic">
   <origin xyz="-1.74241 -0.165257 0.285619" rpy="0 0 0"/>
   <parent link="Base_das_garras_1"/>
   <child link="Garra_1_1"/>
@@ -583,7 +583,7 @@
   <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Deslizador 42" type="prismatic">
+<joint name="Slider 42" type="prismatic">
   <origin xyz="-0.29241 -0.165257 -0.514381" rpy="0 0 0"/>
   <parent link="Base_das_garras_1"/>
   <child link="Garra_2_1"/>
@@ -591,14 +591,14 @@
   <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolucionar 45" type="continuous">
+<joint name="Revolute 45" type="continuous">
   <origin xyz="-0.025 -0.15 -0.115" rpy="0 0 0"/>
   <parent link="10._Left_Hub2_1"/>
   <child link="9._Rear_Hub_Link_1"/>
   <axis xyz="0.0 -0.0 1.0"/>
 </joint>
 
-<joint name="Deslizador 48" type="prismatic">
+<joint name="Slider 48" type="prismatic">
   <origin xyz="1.05825 0.765082 3.442288" rpy="0 0 0"/>
   <parent link="13._Cylinder_-_1_1_2_1"/>
   <child link="14._Cylinder_-_1_12_1"/>
@@ -606,7 +606,7 @@
   <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Deslizador 49" type="prismatic">
+<joint name="Slider 49" type="prismatic">
   <origin xyz="-1.05825 0.765082 3.442288" rpy="0 0 0"/>
   <parent link="15._Cylinder_-_1_1__1"/>
   <child link="16._Cylinder_-_1_1_1"/>
@@ -614,35 +614,35 @@
   <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Revolucionar 50" type="continuous">
+<joint name="Revolute 50" type="continuous">
   <origin xyz="0.527625 1.425994 3.935058" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="13._Cylinder_-_1_1_2_1"/>
   <axis xyz="-1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolucionar 51" type="continuous">
+<joint name="Revolute 51" type="continuous">
   <origin xyz="-2.144465 -1.358944 -3.037636" rpy="0 0 0"/>
   <parent link="14._Cylinder_-_1_12_1"/>
   <child link="Frame_1_1"/>
   <axis xyz="-1.0 -0.0 0.0"/>
 </joint>
 
-<joint name="Revolucionar 52" type="continuous">
+<joint name="Revolute 52" type="continuous">
   <origin xyz="-0.527625 1.425994 3.935058" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="15._Cylinder_-_1_1__1"/>
   <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolucionar 53" type="continuous">
+<joint name="Revolute 53" type="continuous">
   <origin xyz="1.027285 -1.358944 -3.037636" rpy="0 0 0"/>
   <parent link="16._Cylinder_-_1_1_1"/>
   <child link="Frame_1_1"/>
   <axis xyz="1.0 -0.0 -0.0"/>
 </joint>
 
-<joint name="Revolucionar 55" type="continuous">
+<joint name="Revolute 55" type="continuous">
   <origin xyz="0.106093 -0.163613 0.0" rpy="0 0 0"/>
   <parent link="9._Rear_Hub_Link_1"/>
   <child link="18._Steering_Rod_1"/>

@@ -1,232 +1,232 @@
 <?xml version="1.0" ?>
 <robot name="Hyster" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-<transmission name="Deslizador 4_tran">
+<transmission name="Slider 4_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Deslizador 4">
+  <joint name="Slider 4">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Deslizador 4_actr">
+  <actuator name="Slider 4_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 5_tran">
+<transmission name="Revolute 5_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 5">
+  <joint name="Revolute 5">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 5_actr">
+  <actuator name="Revolute 5_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Deslizador 10_tran">
+<transmission name="Slider 10_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Deslizador 10">
+  <joint name="Slider 10">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Deslizador 10_actr">
+  <actuator name="Slider 10_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 11_tran">
+<transmission name="Revolute 11_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 11">
+  <joint name="Revolute 11">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 11_actr">
+  <actuator name="Revolute 11_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 12_tran">
+<transmission name="Revolute 12_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 12">
+  <joint name="Revolute 12">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 12_actr">
+  <actuator name="Revolute 12_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 13_tran">
+<transmission name="Revolute 13_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 13">
+  <joint name="Revolute 13">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 13_actr">
+  <actuator name="Revolute 13_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 16_tran">
+<transmission name="Revolute 16_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 16">
+  <joint name="Revolute 16">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 16_actr">
+  <actuator name="Revolute 16_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 35_tran">
+<transmission name="Revolute 35_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 35">
+  <joint name="Revolute 35">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 35_actr">
+  <actuator name="Revolute 35_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 36_tran">
+<transmission name="Revolute 36_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 36">
+  <joint name="Revolute 36">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 36_actr">
+  <actuator name="Revolute 36_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 37_tran">
+<transmission name="Revolute 37_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 37">
+  <joint name="Revolute 37">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 37_actr">
+  <actuator name="Revolute 37_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 38_tran">
+<transmission name="Revolute 38_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 38">
+  <joint name="Revolute 38">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 38_actr">
+  <actuator name="Revolute 38_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Deslizador 41_tran">
+<transmission name="Slider 41_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Deslizador 41">
+  <joint name="Slider 41">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Deslizador 41_actr">
+  <actuator name="Slider 41_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Deslizador 42_tran">
+<transmission name="Slider 42_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Deslizador 42">
+  <joint name="Slider 42">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Deslizador 42_actr">
+  <actuator name="Slider 42_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 45_tran">
+<transmission name="Revolute 45_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 45">
+  <joint name="Revolute 45">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 45_actr">
+  <actuator name="Revolute 45_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Deslizador 48_tran">
+<transmission name="Slider 48_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Deslizador 48">
+  <joint name="Slider 48">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Deslizador 48_actr">
+  <actuator name="Slider 48_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Deslizador 49_tran">
+<transmission name="Slider 49_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Deslizador 49">
+  <joint name="Slider 49">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Deslizador 49_actr">
+  <actuator name="Slider 49_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 50_tran">
+<transmission name="Revolute 50_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 50">
+  <joint name="Revolute 50">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 50_actr">
+  <actuator name="Revolute 50_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 51_tran">
+<transmission name="Revolute 51_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 51">
+  <joint name="Revolute 51">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 51_actr">
+  <actuator name="Revolute 51_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 52_tran">
+<transmission name="Revolute 52_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 52">
+  <joint name="Revolute 52">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 52_actr">
+  <actuator name="Revolute 52_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 53_tran">
+<transmission name="Revolute 53_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 53">
+  <joint name="Revolute 53">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 53_actr">
+  <actuator name="Revolute 53_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="Revolucionar 55_tran">
+<transmission name="Revolute 55_tran">
   <type>transmission_interface/SimpleTransmission</type>
-  <joint name="Revolucionar 55">
+  <joint name="Revolute 55">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="Revolucionar 55_actr">
+  <actuator name="Revolute 55_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>

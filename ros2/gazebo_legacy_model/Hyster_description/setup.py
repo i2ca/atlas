@@ -26,6 +26,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'teleop_wasd = Hyster_description.teleop_wasd:main',
         ],
     },
 )

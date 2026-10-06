@@ -81,20 +81,6 @@
   <self_collide>true</self_collide>
 </gazebo>
 
-<gazebo reference="9.Left__Rear_Hub_Link2_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
-<gazebo reference="18._Steering_Rod_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
 <gazebo reference="Garra_1_1">
   <material>${body_color}</material>
   <mu1>0.2</mu1>
@@ -109,27 +95,6 @@
   <self_collide>true</self_collide>
 </gazebo>
 
-<gazebo reference="9._Rear_Hub_Link_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
-<gazebo reference="14._Cylinder_-_1_12_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
-<gazebo reference="16._Cylinder_-_1_1_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
 <gazebo reference="13._Cylinder_-_1_1_2_1">
   <material>${body_color}</material>
   <mu1>0.2</mu1>
@@ -137,28 +102,7 @@
   <self_collide>true</self_collide>
 </gazebo>
 
-<gazebo reference="Frame_1_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
 <gazebo reference="15._Cylinder_-_1_1__1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
-<gazebo reference="Frame_1_1">
-  <material>${body_color}</material>
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <self_collide>true</self_collide>
-</gazebo>
-
-<gazebo reference="18._Steering_Rod_1">
   <material>${body_color}</material>
   <mu1>0.2</mu1>
   <mu2>0.2</mu2>

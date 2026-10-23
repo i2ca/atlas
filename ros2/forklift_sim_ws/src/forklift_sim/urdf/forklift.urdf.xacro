@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!-- Hyster + ros2_control (gz_ros2_control). Modelo: copia do gazebo_legacy_model em Hyster_description. -->
+<robot name="Hyster" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find Hyster_description)/urdf/Hyster.xacro"/>
+
+  <!-- LiDAR (gpu_lidar). A pose e a grade vem do launch, calculadas do astro.ini
+       (sensor_board_1 * lidar0 e lidar0_vertical_angles / time_between_shots). -->
+  <xacro:arg name="lidar" default="false"/>
+  <xacro:arg name="lidar_pose" default="0 0 2.5 0 0 0"/>
+  <xacro:arg name="lidar_hsamples" default="1800"/>
+  <xacro:arg name="lidar_vsamples" default="320"/>
+  <xacro:arg name="lidar_vmin" default="-0.436"/>
+  <xacro:arg name="lidar_vmax" default="0.272"/>
+  <xacro:arg name="lidar_min_range" default="0.6"/>
+  <xacro:arg name="lidar_max_range" default="230"/>
+  <xacro:arg name="lidar_rate" default="20"/>
+  <xacro:arg name="xsens_pose" default="0 0 2.46 0 0 0"/>
+  <xacro:if value="$(arg lidar)">
+    <gazebo reference="base_footprint">
+      <sensor name="lidar0" type="gpu_lidar">
+        <pose>$(arg lidar_pose)</pose>
+        <topic>lidar0</topic>
+        <update_rate>$(arg lidar_rate)</update_rate>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>$(arg lidar_hsamples)</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159265</min_angle>
+              <max_angle>${3.14159265 - 2.0 * 3.14159265 / $(arg lidar_hsamples)}</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>$(arg lidar_vsamples)</samples>
+              <resolution>1</resolution>
+              <min_angle>$(arg lidar_vmin)</min_angle>
+              <max_angle>$(arg lidar_vmax)</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>$(arg lidar_min_range)</min>
+            <max>$(arg lidar_max_range)</max>
+            <resolution>0.004</resolution>
+          </range>
+        </lidar>
+      </sensor>
+      <!-- IMU do veiculo (Xsens da IARA: XSENS_QUAT), na sensor_board_1 * xsens_* do astro.ini -->
+      <sensor name="xsens" type="imu">
+        <pose>$(arg xsens_pose)</pose>
+        <topic>xsens/imu</topic>
+        <update_rate>250</update_rate>
+        <always_on>true</always_on>
+      </sensor>
+      <!-- IMU interna do LiDAR (o OT-128 tem uma; o hesai_driver publica como imu_lidar) -->
+      <sensor name="lidar0_imu" type="imu">
+        <pose>$(arg lidar_pose)</pose>
+        <topic>lidar0/imu</topic>
+        <update_rate>200</update_rate>
+        <always_on>true</always_on>
+      </sensor>
+    </gazebo>
+  </xacro:if>
+
+  <!-- CAMERAS (cameras:=true). Pose, resolucao, campo de visao e taxa vem do launch, calculados
+       dos intelbrasN_* do astro.ini. A 3 (pinca) vai presa na base da garra (Base_das_garras_1):
+       sobe, desce e desliza junto. O camera_stream manda cada uma para o camera_drivers. -->
+  <xacro:arg name="cameras" default="false"/>
+  <xacro:arg name="cam1_link" default="base_footprint"/>
+  <xacro:arg name="cam1_pose" default="-0.55 0 2.55 0 0.25 0"/>
+  <xacro:arg name="cam2_link" default="base_footprint"/>
+  <xacro:arg name="cam2_pose" default="-2.70 0 1.45 0 0.30 3.141593"/>
+  <xacro:arg name="cam3_link" default="base_footprint"/>
+  <xacro:arg name="cam3_pose" default="0.80 0 1.55 0 0.26 0"/>
+  <xacro:arg name="cam_width" default="640"/>
+  <xacro:arg name="cam_height" default="480"/>
+  <xacro:arg name="cam_hfov" default="1.3963"/>
+  <xacro:arg name="cam_rate" default="15"/>
+  <xacro:macro name="sim_camera" params="n link pose">
+    <gazebo reference="${link}">
+      <sensor name="forklift_cam${n}" type="camera">
+        <pose>${pose}</pose>
+        <topic>forklift_cam${n}/image</topic>
+        <update_rate>$(arg cam_rate)</update_rate>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>$(arg cam_hfov)</horizontal_fov>
+          <image>
+            <width>$(arg cam_width)</width>
+            <height>$(arg cam_height)</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>120</far>
+          </clip>
+        </camera>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+  <xacro:if value="$(arg cameras)">
+    <xacro:sim_camera n="1" link="$(arg cam1_link)" pose="$(arg cam1_pose)"/>
+    <xacro:sim_camera n="2" link="$(arg cam2_link)" pose="$(arg cam2_pose)"/>
+    <xacro:sim_camera n="3" link="$(arg cam3_link)" pose="$(arg cam3_pose)"/>
+  </xacro:if>
+
+  <xacro:macro name="pos_joint" params="name">
+    <joint name="${name}">
+      <command_interface name="position"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="vel_joint" params="name">
+    <joint name="${name}">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <ros2_control name="HysterGz" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <!-- mastro e garra -->
+    <xacro:pos_joint name="carriage_joint"/>
+    <xacro:pos_joint name="mast_lift_joint"/>
+    <xacro:pos_joint name="clamp_base_joint"/>
+    <xacro:pos_joint name="clamp_1_joint"/>
+    <xacro:pos_joint name="clamp_2_joint"/>
+    <!-- direcao traseira -->
+    <xacro:pos_joint name="left_hub_steer_joint"/>
+    <xacro:pos_joint name="right_hub_steer_joint"/>
+    <!-- tracao dianteira -->
+    <xacro:vel_joint name="left_front_wheel_joint"/>
+    <xacro:vel_joint name="right_front_wheel_joint"/>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find forklift_sim)/config/controllers.yaml</parameters>
+    </plugin>
+    <!-- A base anda pela velocidade (cinematico): o contato das rodas deste modelo
+         de 23 t nao e confiavel. As rodas e a direcao giram so para acompanhar. -->
+    <plugin filename="gz-sim-velocity-control-system" name="gz::sim::systems::VelocityControl">
+      <topic>/model/hyster/cmd_vel</topic>
+    </plugin>
+  </gazebo>
+</robot>

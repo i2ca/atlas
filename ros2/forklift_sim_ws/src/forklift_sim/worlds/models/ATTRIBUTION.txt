@@ -1,0 +1,10 @@
+Modelos 3D usados no mundo "port" (worlds/port.sdf), baixados de poly.pizza em 23/10/2026:
+
+cargo_truck.glb
+  "Cargo Truck" por J-Toastie -- https://poly.pizza/m/Fy3WI3uXNQ
+  Licenca: Creative Commons Attribution 3.0 (CC BY 3.0) -- https://creativecommons.org/licenses/by/3.0/
+
+container_ship.glb / container_ship_blue.glb
+  "Container Ship" por Alex Safayan -- https://poly.pizza/m/3AmDGcCu6Ll
+  Licenca: Creative Commons Attribution 3.0 (CC BY 3.0) -- https://creativecommons.org/licenses/by/3.0/
+  container_ship_blue.glb: copia com a cor do casco (material mat14) trocada de laranja para azul.

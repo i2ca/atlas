@@ -1,0 +1,33 @@
+can_bridge:
+  ros__parameters:
+    use_sim_time: true
+    can_interface: vcan0        # "none" = sem CAN (so /cmd_vel)
+    # sem frame do joystick (0x0CFFC0EC) por mais que isso, a garra para
+    command_timeout: 0.3
+    # obedece o bit "garra desconectada" da VCU (0x18FF1027) quando ele estiver no barramento
+    respect_vcu_fault: true
+
+    # O que cada eixo do joystick faz: lift | sideshift | clamp | none
+    # e o sinal (+1/-1) para inverter o sentido da alavanca.
+    # PALPITE: ainda nao conferido na empilhadeira real.
+    axis1_function: lift
+    axis1_sign: 1.0
+    axis2_function: sideshift
+    axis2_sign: 1.0
+    axis3_function: clamp
+    axis3_sign: 1.0
+    axis4_function: none
+    axis4_sign: 1.0
+
+    # velocidade com a alavanca a 100 % (proporcional abaixo disso)
+    lift_rate: 0.4      # m/s
+    sideshift_rate: 0.1 # m/s
+    clamp_rate: 0.15    # m/s por braco (+ = fecha)
+
+    # /cmd_vel -> tracao dianteira + direcao traseira
+    wheel_radius: 0.405
+    wheelbase: 2.235
+    max_steer: 0.6
+    steer_sign: 1.0
+    drive_sign: 1.0
+    cmd_vel_timeout: 0.5

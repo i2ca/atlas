@@ -1,0 +1,13 @@
+Modelos usados pelos mundos (caminhos RELATIVOS a worlds/, instalados pelo setup.py em share/forklift_sim/worlds).
+
+cargo_truck.glb, container_ship*.glb  poly.pizza, CC BY 3.0 -- ver ATTRIBUTION.txt
+pulp_unit/                            unidade de celulose (8 fardos, 2 t), malha e textura geradas aqui
+ship_aaa/                             NAO VAI NO REPOSITORIO (licenca nao confirmada: texturas de banco de imagens).
+                                      "Ship AAA" (pacote do Sketchfab ship-aaa-re-upload.zip). Para ter o navio no
+                                      porto, copie a pasta ship_aaa/ de quem ja tem (ela ja vem com o OBJ de dupla
+                                      face e as texturas renomeadas) para ca e rode colcon build. Sem ela o
+                                      sim.launch.py avisa e tira so' o visual do navio (a caixa de colisao fica).
+
+As pecas do galpao (Depot, OpenRobotics, CC-BY 4.0) vem por URL do Gazebo Fuel: na primeira vez o Gazebo baixa
+para ~/.gz/fuel (precisa de internet so' nessa vez). meshes/depot_boxset.dae e' o BOXSET do Depot sem as paredes
+(gerado por tools/make_big_depot.py).

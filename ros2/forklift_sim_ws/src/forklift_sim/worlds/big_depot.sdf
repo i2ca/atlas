@@ -1,0 +1,1761 @@
+<?xml version="1.0"?>
+<!--
+  Deposito grande para a simulacao da empilhadeira: 113 x 79 m, teto a 12 m,
+  4 x 4 blocos de prateleiras com corredores de 6.0 m.
+  GERADO por tools/make_big_depot.py -- edite o gerador, nao este arquivo.
+  Pecas do modelo "Depot" de OpenRobotics e colisoes do mundo "tugbot_depot" de MovAi, ambos do
+  Gazebo Fuel, licenca CC-BY 4.0. A malha e as texturas sao lidas do cache ~/.gz/fuel.
+  Inicio sugerido da empilhadeira: x 0.2, y 8.8, yaw 0.
+-->
+<sdf version="1.9">
+  <world name="big_depot">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <scene>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <background>0.3 0.7 0.9 1</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 50 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.3 -1</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>340 340</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>340 340</size></plane></geometry>
+          <material><ambient>0.45 0.45 0.45 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="big_depot">
+      <static>true</static>
+      <link name="main">
+        <visual name="ROOF_visual">
+          <pose>40.800 26.846 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>2.2512 3.1732 0.8000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Depot.dae</uri>
+                        <submesh>
+                            <name>ROOF</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="WALLS_visual">
+          <pose>40.800 26.846 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>2.2512 3.1732 0.8000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Depot.dae</uri>
+                        <submesh>
+                            <name>WALLS</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Roughness.png</roughness_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="WINDOW_visual">
+          <pose>40.800 26.846 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>2.2512 3.1732 0.8000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Depot.dae</uri>
+                        <submesh>
+                            <name>WINDOW</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Window_WINDOW_BaseColor.png</albedo_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Window_WINDOW_Metallic.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Window_WINDOW_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="FLOOR_visual">
+          <pose>40.800 26.846 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>2.2512 3.1732 0.8000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Depot.dae</uri>
+                        <submesh>
+                            <name>FLOOR</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Roughness.png</roughness_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="BOXSET_visual_0_0_1">
+          <pose>0.000 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_0_2">
+          <pose>0.000 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_0">
+          <pose>0.223 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_0">
+          <pose>3.173 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_0">
+          <pose>5.953 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_0">
+          <pose>8.559 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_0">
+          <pose>11.326 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_0">
+          <pose>0.223 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_0">
+          <pose>3.173 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_0">
+          <pose>5.953 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_0">
+          <pose>8.559 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_0">
+          <pose>11.326 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_0">
+          <pose>-1.227 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_0">
+          <pose>-0.614 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_0">
+          <pose>-1.600 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_0_1_3">
+          <pose>0.000 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_1_4">
+          <pose>0.000 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_1">
+          <pose>0.223 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_1">
+          <pose>3.173 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_1">
+          <pose>5.953 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_1">
+          <pose>8.559 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_1">
+          <pose>11.326 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_1">
+          <pose>0.223 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_1">
+          <pose>3.173 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_1">
+          <pose>5.953 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_1">
+          <pose>8.559 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_1">
+          <pose>11.326 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_1">
+          <pose>-1.227 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_1">
+          <pose>-0.614 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_1">
+          <pose>-1.600 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_0_2_5">
+          <pose>0.000 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_2_6">
+          <pose>0.000 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_2">
+          <pose>0.223 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_2">
+          <pose>3.173 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_2">
+          <pose>5.953 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_2">
+          <pose>8.559 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_2">
+          <pose>11.326 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_2">
+          <pose>0.223 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_2">
+          <pose>3.173 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_2">
+          <pose>5.953 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_2">
+          <pose>8.559 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_2">
+          <pose>11.326 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_2">
+          <pose>-1.227 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_2">
+          <pose>-0.614 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_2">
+          <pose>-1.600 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_0_3_7">
+          <pose>0.000 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_3_8">
+          <pose>0.000 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_3">
+          <pose>0.223 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_3">
+          <pose>3.173 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_3">
+          <pose>5.953 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_3">
+          <pose>8.559 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_3">
+          <pose>11.326 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_3">
+          <pose>0.223 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_3">
+          <pose>3.173 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_3">
+          <pose>5.953 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_3">
+          <pose>8.559 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_3">
+          <pose>11.326 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_3">
+          <pose>-1.227 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_3">
+          <pose>-0.614 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_3">
+          <pose>-1.600 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_0_9">
+          <pose>25.800 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_0_10">
+          <pose>25.800 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_0">
+          <pose>26.023 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_0">
+          <pose>28.973 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_0">
+          <pose>31.753 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_0">
+          <pose>34.359 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_0">
+          <pose>37.126 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_0">
+          <pose>26.023 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_0">
+          <pose>28.973 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_0">
+          <pose>31.753 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_0">
+          <pose>34.359 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_0">
+          <pose>37.126 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_0">
+          <pose>24.573 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_0">
+          <pose>25.186 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_0">
+          <pose>24.200 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_1_11">
+          <pose>25.800 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_1_12">
+          <pose>25.800 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_1">
+          <pose>26.023 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_1">
+          <pose>28.973 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_1">
+          <pose>31.753 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_1">
+          <pose>34.359 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_1">
+          <pose>37.126 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_1">
+          <pose>26.023 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_1">
+          <pose>28.973 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_1">
+          <pose>31.753 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_1">
+          <pose>34.359 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_1">
+          <pose>37.126 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_1">
+          <pose>24.573 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_1">
+          <pose>25.186 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_1">
+          <pose>24.200 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_2_13">
+          <pose>25.800 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_2_14">
+          <pose>25.800 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_2">
+          <pose>26.023 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_2">
+          <pose>28.973 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_2">
+          <pose>31.753 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_2">
+          <pose>34.359 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_2">
+          <pose>37.126 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_2">
+          <pose>26.023 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_2">
+          <pose>28.973 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_2">
+          <pose>31.753 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_2">
+          <pose>34.359 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_2">
+          <pose>37.126 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_2">
+          <pose>24.573 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_2">
+          <pose>25.186 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_2">
+          <pose>24.200 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_3_15">
+          <pose>25.800 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_3_16">
+          <pose>25.800 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_3">
+          <pose>26.023 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_3">
+          <pose>28.973 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_3">
+          <pose>31.753 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_3">
+          <pose>34.359 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_3">
+          <pose>37.126 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_3">
+          <pose>26.023 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_3">
+          <pose>28.973 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_3">
+          <pose>31.753 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_3">
+          <pose>34.359 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_3">
+          <pose>37.126 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_3">
+          <pose>24.573 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_3">
+          <pose>25.186 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_3">
+          <pose>24.200 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_0_17">
+          <pose>51.600 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_0_18">
+          <pose>51.600 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_0">
+          <pose>51.823 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_0">
+          <pose>54.773 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_0">
+          <pose>57.553 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_0">
+          <pose>60.159 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_0">
+          <pose>62.926 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_0">
+          <pose>51.823 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_0">
+          <pose>54.773 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_0">
+          <pose>57.553 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_0">
+          <pose>60.159 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_0">
+          <pose>62.926 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_0">
+          <pose>50.373 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_0">
+          <pose>50.986 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_0">
+          <pose>50.000 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_1_19">
+          <pose>51.600 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_1_20">
+          <pose>51.600 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_1">
+          <pose>51.823 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_1">
+          <pose>54.773 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_1">
+          <pose>57.553 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_1">
+          <pose>60.159 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_1">
+          <pose>62.926 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_1">
+          <pose>51.823 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_1">
+          <pose>54.773 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_1">
+          <pose>57.553 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_1">
+          <pose>60.159 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_1">
+          <pose>62.926 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_1">
+          <pose>50.373 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_1">
+          <pose>50.986 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_1">
+          <pose>50.000 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_2_21">
+          <pose>51.600 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_2_22">
+          <pose>51.600 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_2">
+          <pose>51.823 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_2">
+          <pose>54.773 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_2">
+          <pose>57.553 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_2">
+          <pose>60.159 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_2">
+          <pose>62.926 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_2">
+          <pose>51.823 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_2">
+          <pose>54.773 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_2">
+          <pose>57.553 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_2">
+          <pose>60.159 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_2">
+          <pose>62.926 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_2">
+          <pose>50.373 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_2">
+          <pose>50.986 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_2">
+          <pose>50.000 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_3_23">
+          <pose>51.600 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_3_24">
+          <pose>51.600 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_3">
+          <pose>51.823 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_3">
+          <pose>54.773 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_3">
+          <pose>57.553 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_3">
+          <pose>60.159 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_3">
+          <pose>62.926 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_3">
+          <pose>51.823 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_3">
+          <pose>54.773 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_3">
+          <pose>57.553 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_3">
+          <pose>60.159 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_3">
+          <pose>62.926 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_3">
+          <pose>50.373 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_3">
+          <pose>50.986 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_3">
+          <pose>50.000 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_0_25">
+          <pose>77.400 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_0_26">
+          <pose>77.400 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_0">
+          <pose>77.623 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_0">
+          <pose>80.573 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_0">
+          <pose>83.353 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_0">
+          <pose>85.959 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_0">
+          <pose>88.726 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_0">
+          <pose>77.623 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_0">
+          <pose>80.573 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_0">
+          <pose>83.353 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_0">
+          <pose>85.959 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_0">
+          <pose>88.726 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_0">
+          <pose>76.173 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_0">
+          <pose>76.786 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_0">
+          <pose>75.800 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_1_27">
+          <pose>77.400 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_1_28">
+          <pose>77.400 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_1">
+          <pose>77.623 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_1">
+          <pose>80.573 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_1">
+          <pose>83.353 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_1">
+          <pose>85.959 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_1">
+          <pose>88.726 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_1">
+          <pose>77.623 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_1">
+          <pose>80.573 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_1">
+          <pose>83.353 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_1">
+          <pose>85.959 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_1">
+          <pose>88.726 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_1">
+          <pose>76.173 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_1">
+          <pose>76.786 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_1">
+          <pose>75.800 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_2_29">
+          <pose>77.400 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_2_30">
+          <pose>77.400 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_2">
+          <pose>77.623 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_2">
+          <pose>80.573 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_2">
+          <pose>83.353 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_2">
+          <pose>85.959 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_2">
+          <pose>88.726 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_2">
+          <pose>77.623 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_2">
+          <pose>80.573 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_2">
+          <pose>83.353 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_2">
+          <pose>85.959 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_2">
+          <pose>88.726 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_2">
+          <pose>76.173 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_2">
+          <pose>76.786 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_2">
+          <pose>75.800 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_3_31">
+          <pose>77.400 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_3_32">
+          <pose>77.400 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_3">
+          <pose>77.623 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_3">
+          <pose>80.573 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_3">
+          <pose>83.353 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_3">
+          <pose>85.959 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_3">
+          <pose>88.726 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_3">
+          <pose>77.623 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_3">
+          <pose>80.573 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_3">
+          <pose>83.353 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_3">
+          <pose>85.959 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_3">
+          <pose>88.726 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_3">
+          <pose>76.173 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_3">
+          <pose>76.786 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_3">
+          <pose>75.800 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <collision name="wall0">
+          <pose>40.800 -13.400 6.000 0 0 0</pose>
+          <geometry><box><size>113.200 0.200 12.000</size></box></geometry>
+        </collision>
+        <collision name="wall1">
+          <pose>40.800 65.400 6.000 0 0 0</pose>
+          <geometry><box><size>113.200 0.200 12.000</size></box></geometry>
+        </collision>
+        <collision name="wall2">
+          <pose>-15.800 26.000 6.000 0 0 0</pose>
+          <geometry><box><size>0.200 78.800 12.000</size></box></geometry>
+        </collision>
+        <collision name="wall3">
+          <pose>97.400 26.000 6.000 0 0 0</pose>
+          <geometry><box><size>0.200 78.800 12.000</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+  </world>
+</sdf>

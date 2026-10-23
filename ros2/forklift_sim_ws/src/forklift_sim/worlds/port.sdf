@@ -1,0 +1,1930 @@
+<?xml version="1.0"?>
+<!--
+  Porto de celulose para a simulacao da empilhadeira: o big_depot com a frente sul aberta para o patio
+  (cobertura, faixa de pedestre, patio, cais, navio com guindastes, caminhoes, cones, postes).
+  GERADO por tools/make_port_world.py a partir do big_depot.sdf -- edite o gerador, nao este arquivo.
+  Galpao: pecas do "Depot" (OpenRobotics) e colisoes do "tugbot_depot" (MovAi), Gazebo Fuel, CC-BY 4.0.
+  Porto: navio e caminhao de poly.pizza (CC BY 3.0, worlds/models/ATTRIBUTION.txt), resto primitivas. Inicio sugerido no patio: x 5, y -27, yaw 0 (ou dentro do galpao: 0.2, 8.8).
+-->
+<sdf version="1.9">
+  <world name="port">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <scene>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <background>0.3 0.7 0.9 1</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <light type="directional" name="sun">
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 50 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.3 -1</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>900 900</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>900 900</size></plane></geometry>
+          <material><ambient>0.45 0.45 0.45 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="big_depot">
+      <static>true</static>
+      <link name="main">
+        <visual name="ROOF_visual">
+          <pose>40.800 26.846 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>2.2512 3.1732 0.8000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Depot.dae</uri>
+                        <submesh>
+                            <name>ROOF</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/ROOF_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="FLOOR_visual">
+          <pose>40.800 26.846 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>2.2512 3.1732 0.8000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Depot.dae</uri>
+                        <submesh>
+                            <name>FLOOR</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/FLOOR_Roughness.png</roughness_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="BOXSET_visual_0_0_1">
+          <pose>0.000 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_0_2">
+          <pose>0.000 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_0">
+          <pose>0.223 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_0">
+          <pose>3.173 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_0">
+          <pose>5.953 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_0">
+          <pose>8.559 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_0">
+          <pose>11.326 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_0">
+          <pose>0.223 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_0">
+          <pose>3.173 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_0">
+          <pose>5.953 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_0">
+          <pose>8.559 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_0">
+          <pose>11.326 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_0">
+          <pose>-1.227 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_0">
+          <pose>-0.614 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_0">
+          <pose>-1.600 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_0_1_3">
+          <pose>0.000 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_1_4">
+          <pose>0.000 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_1">
+          <pose>0.223 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_1">
+          <pose>3.173 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_1">
+          <pose>5.953 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_1">
+          <pose>8.559 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_1">
+          <pose>11.326 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_1">
+          <pose>0.223 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_1">
+          <pose>3.173 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_1">
+          <pose>5.953 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_1">
+          <pose>8.559 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_1">
+          <pose>11.326 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_1">
+          <pose>-1.227 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_1">
+          <pose>-0.614 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_1">
+          <pose>-1.600 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_0_2_5">
+          <pose>0.000 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_2_6">
+          <pose>0.000 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_2">
+          <pose>0.223 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_2">
+          <pose>3.173 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_2">
+          <pose>5.953 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_2">
+          <pose>8.559 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_2">
+          <pose>11.326 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_2">
+          <pose>0.223 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_2">
+          <pose>3.173 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_2">
+          <pose>5.953 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_2">
+          <pose>8.559 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_2">
+          <pose>11.326 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_2">
+          <pose>-1.227 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_2">
+          <pose>-0.614 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_2">
+          <pose>-1.600 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_0_3_7">
+          <pose>0.000 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_0_3_8">
+          <pose>0.000 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_0_3">
+          <pose>0.223 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_0_3">
+          <pose>3.173 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_0_3">
+          <pose>5.953 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_0_3">
+          <pose>8.559 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_0_3">
+          <pose>11.326 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_0_3">
+          <pose>0.223 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_0_3">
+          <pose>3.173 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_0_3">
+          <pose>5.953 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_0_3">
+          <pose>8.559 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_0_3">
+          <pose>11.326 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_0_3">
+          <pose>-1.227 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_0_3">
+          <pose>-0.614 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_0_3">
+          <pose>-1.600 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_0_9">
+          <pose>25.800 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_0_10">
+          <pose>25.800 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_0">
+          <pose>26.023 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_0">
+          <pose>28.973 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_0">
+          <pose>31.753 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_0">
+          <pose>34.359 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_0">
+          <pose>37.126 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_0">
+          <pose>26.023 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_0">
+          <pose>28.973 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_0">
+          <pose>31.753 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_0">
+          <pose>34.359 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_0">
+          <pose>37.126 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_0">
+          <pose>24.573 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_0">
+          <pose>25.186 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_0">
+          <pose>24.200 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_1_11">
+          <pose>25.800 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_1_12">
+          <pose>25.800 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_1">
+          <pose>26.023 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_1">
+          <pose>28.973 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_1">
+          <pose>31.753 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_1">
+          <pose>34.359 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_1">
+          <pose>37.126 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_1">
+          <pose>26.023 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_1">
+          <pose>28.973 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_1">
+          <pose>31.753 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_1">
+          <pose>34.359 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_1">
+          <pose>37.126 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_1">
+          <pose>24.573 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_1">
+          <pose>25.186 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_1">
+          <pose>24.200 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_2_13">
+          <pose>25.800 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_2_14">
+          <pose>25.800 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_2">
+          <pose>26.023 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_2">
+          <pose>28.973 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_2">
+          <pose>31.753 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_2">
+          <pose>34.359 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_2">
+          <pose>37.126 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_2">
+          <pose>26.023 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_2">
+          <pose>28.973 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_2">
+          <pose>31.753 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_2">
+          <pose>34.359 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_2">
+          <pose>37.126 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_2">
+          <pose>24.573 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_2">
+          <pose>25.186 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_2">
+          <pose>24.200 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_1_3_15">
+          <pose>25.800 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_1_3_16">
+          <pose>25.800 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_1_3">
+          <pose>26.023 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_1_3">
+          <pose>28.973 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_1_3">
+          <pose>31.753 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_1_3">
+          <pose>34.359 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_1_3">
+          <pose>37.126 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_1_3">
+          <pose>26.023 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_1_3">
+          <pose>28.973 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_1_3">
+          <pose>31.753 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_1_3">
+          <pose>34.359 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_1_3">
+          <pose>37.126 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_1_3">
+          <pose>24.573 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_1_3">
+          <pose>25.186 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_1_3">
+          <pose>24.200 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_0_17">
+          <pose>51.600 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_0_18">
+          <pose>51.600 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_0">
+          <pose>51.823 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_0">
+          <pose>54.773 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_0">
+          <pose>57.553 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_0">
+          <pose>60.159 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_0">
+          <pose>62.926 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_0">
+          <pose>51.823 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_0">
+          <pose>54.773 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_0">
+          <pose>57.553 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_0">
+          <pose>60.159 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_0">
+          <pose>62.926 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_0">
+          <pose>50.373 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_0">
+          <pose>50.986 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_0">
+          <pose>50.000 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_1_19">
+          <pose>51.600 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_1_20">
+          <pose>51.600 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_1">
+          <pose>51.823 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_1">
+          <pose>54.773 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_1">
+          <pose>57.553 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_1">
+          <pose>60.159 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_1">
+          <pose>62.926 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_1">
+          <pose>51.823 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_1">
+          <pose>54.773 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_1">
+          <pose>57.553 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_1">
+          <pose>60.159 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_1">
+          <pose>62.926 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_1">
+          <pose>50.373 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_1">
+          <pose>50.986 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_1">
+          <pose>50.000 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_2_21">
+          <pose>51.600 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_2_22">
+          <pose>51.600 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_2">
+          <pose>51.823 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_2">
+          <pose>54.773 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_2">
+          <pose>57.553 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_2">
+          <pose>60.159 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_2">
+          <pose>62.926 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_2">
+          <pose>51.823 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_2">
+          <pose>54.773 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_2">
+          <pose>57.553 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_2">
+          <pose>60.159 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_2">
+          <pose>62.926 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_2">
+          <pose>50.373 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_2">
+          <pose>50.986 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_2">
+          <pose>50.000 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_2_3_23">
+          <pose>51.600 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_2_3_24">
+          <pose>51.600 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_2_3">
+          <pose>51.823 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_2_3">
+          <pose>54.773 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_2_3">
+          <pose>57.553 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_2_3">
+          <pose>60.159 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_2_3">
+          <pose>62.926 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_2_3">
+          <pose>51.823 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_2_3">
+          <pose>54.773 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_2_3">
+          <pose>57.553 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_2_3">
+          <pose>60.159 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_2_3">
+          <pose>62.926 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_2_3">
+          <pose>50.373 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_2_3">
+          <pose>50.986 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_2_3">
+          <pose>50.000 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_0_25">
+          <pose>77.400 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_0_26">
+          <pose>77.400 0.000 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_0">
+          <pose>77.623 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_0">
+          <pose>80.573 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_0">
+          <pose>83.353 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_0">
+          <pose>85.959 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_0">
+          <pose>88.726 -4.727 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_0">
+          <pose>77.623 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_0">
+          <pose>80.573 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_0">
+          <pose>83.353 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_0">
+          <pose>85.959 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_0">
+          <pose>88.726 -2.374 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_0">
+          <pose>76.173 4.156 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_0">
+          <pose>76.786 -2.389 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_0">
+          <pose>75.800 4.822 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_1_27">
+          <pose>77.400 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_1_28">
+          <pose>77.400 17.200 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_1">
+          <pose>77.623 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_1">
+          <pose>80.573 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_1">
+          <pose>83.353 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_1">
+          <pose>85.959 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_1">
+          <pose>88.726 12.473 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_1">
+          <pose>77.623 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_1">
+          <pose>80.573 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_1">
+          <pose>83.353 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_1">
+          <pose>85.959 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_1">
+          <pose>88.726 14.826 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_1">
+          <pose>76.173 21.356 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_1">
+          <pose>76.786 14.811 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_1">
+          <pose>75.800 22.023 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_2_29">
+          <pose>77.400 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_2_30">
+          <pose>77.400 34.400 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_2">
+          <pose>77.623 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_2">
+          <pose>80.573 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_2">
+          <pose>83.353 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_2">
+          <pose>85.959 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_2">
+          <pose>88.726 29.673 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_2">
+          <pose>77.623 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_2">
+          <pose>80.573 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_2">
+          <pose>83.353 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_2">
+          <pose>85.959 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_2">
+          <pose>88.726 32.026 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_2">
+          <pose>76.173 38.556 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_2">
+          <pose>76.786 32.011 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_2">
+          <pose>75.800 39.222 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+        <visual name="BOXSET_visual_3_3_31">
+          <pose>77.400 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>meshes/depot_boxset.dae</uri>
+                        <submesh>
+                            <name>BOXSET</name>
+                            <center>false</center>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Albedo.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Normal.png</normal_map>
+                            <metalness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Metalness.png</metalness_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Roughness.png</roughness_map>
+                            <emissive_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/BOXSET_Emissive.png</emissive_map>
+                            <light_map uv_set="1">https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/DepotLightmap.png</light_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <visual name="crates_3_3_32">
+          <pose>77.400 51.600 0.000 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.6000 0.6000 0.6000</scale>
+                        <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/meshes/Crates.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0</diffuse>
+                    <specular>1.0 1.0 1.0</specular>
+                    <pbr>
+                        <metal>
+                            <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_BaseColor.png</albedo_map>
+                            <normal_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Normal.png</normal_map>
+                            <roughness_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/Crates_Crates_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+        </visual>
+        <collision name="boxes1_3_3">
+          <pose>77.623 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes2_3_3">
+          <pose>80.573 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes3_3_3">
+          <pose>83.353 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes4_3_3">
+          <pose>85.959 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes5_3_3">
+          <pose>88.726 46.873 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes6_3_3">
+          <pose>77.623 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes7_3_3">
+          <pose>80.573 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes8_3_3">
+          <pose>83.353 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes9_3_3">
+          <pose>85.959 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes10_3_3">
+          <pose>88.726 49.226 0.685 0 0 0</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="boxes11_3_3">
+          <pose>76.173 55.756 0.685 0 0 -1.028</pose>
+          <geometry><box><size>1.288 1.422 1.288</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover1_3_3">
+          <pose>76.786 49.211 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.440 0.719</size></box></geometry>
+        </collision>
+        <collision name="pallet_mover2_3_3">
+          <pose>75.800 56.422 0.418 0 0 0</pose>
+          <geometry><box><size>0.363 0.244 0.719</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="port">
+      <static>true</static>
+      <link name="main">
+        <visual name="wall_n_1_v"><pose>40.800 65.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>113.200 0.300 12.000</size></box></geometry><material><ambient>0.576 0.584 0.576 1</ambient><diffuse>0.720 0.730 0.720 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="wall_n_1_c"><pose>40.800 65.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>113.200 0.300 12.000</size></box></geometry></collision>
+        <visual name="wall_w_2_v"><pose>-15.800 26.000 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.300 78.800 12.000</size></box></geometry><material><ambient>0.576 0.584 0.576 1</ambient><diffuse>0.720 0.730 0.720 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="wall_w_2_c"><pose>-15.800 26.000 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.300 78.800 12.000</size></box></geometry></collision>
+        <visual name="wall_e_3_v"><pose>97.400 26.000 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.300 78.800 12.000</size></box></geometry><material><ambient>0.576 0.584 0.576 1</ambient><diffuse>0.720 0.730 0.720 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="wall_e_3_c"><pose>97.400 26.000 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.300 78.800 12.000</size></box></geometry></collision>
+        <visual name="wall_n_tex_4_v"><geometry><mesh><uri>meshes/port_wall_n_tex.obj</uri></mesh></geometry><material><diffuse>0.95 0.95 0.95 1</diffuse><specular>0.05 0.05 0.05 1</specular><pbr><metal><albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Albedo.png</albedo_map><metalness>0.0</metalness><roughness>0.9</roughness></metal></pbr></material></visual>
+        <visual name="wall_w_tex_5_v"><geometry><mesh><uri>meshes/port_wall_w_tex.obj</uri></mesh></geometry><material><diffuse>0.95 0.95 0.95 1</diffuse><specular>0.05 0.05 0.05 1</specular><pbr><metal><albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Albedo.png</albedo_map><metalness>0.0</metalness><roughness>0.9</roughness></metal></pbr></material></visual>
+        <visual name="wall_e_tex_6_v"><geometry><mesh><uri>meshes/port_wall_e_tex.obj</uri></mesh></geometry><material><diffuse>0.95 0.95 0.95 1</diffuse><specular>0.05 0.05 0.05 1</specular><pbr><metal><albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/depot/6/files/materials/textures/WALLS_Albedo.png</albedo_map><metalness>0.0</metalness><roughness>0.9</roughness></metal></pbr></material></visual>
+        <visual name="front_column_7_v"><pose>-15.800 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_7_c"><pose>-15.800 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_8_v"><pose>-6.367 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_8_c"><pose>-6.367 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_9_v"><pose>3.067 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_9_c"><pose>3.067 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_10_v"><pose>12.500 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_10_c"><pose>12.500 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_11_v"><pose>21.933 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_11_c"><pose>21.933 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_12_v"><pose>31.367 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_12_c"><pose>31.367 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_13_v"><pose>40.800 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_13_c"><pose>40.800 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_14_v"><pose>50.233 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_14_c"><pose>50.233 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_15_v"><pose>59.667 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_15_c"><pose>59.667 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_16_v"><pose>69.100 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_16_c"><pose>69.100 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_17_v"><pose>78.533 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_17_c"><pose>78.533 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_18_v"><pose>87.967 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_18_c"><pose>87.967 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_column_19_v"><pose>97.400 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_column_19_c"><pose>97.400 -13.400 6.000 0.0000 0.0000 0.0000</pose><geometry><box><size>0.600 0.600 12.000</size></box></geometry></collision>
+        <visual name="front_beam_20_v"><pose>40.800 -13.400 11.250 0.0000 0.0000 0.0000</pose><geometry><box><size>113.200 0.500 1.500</size></box></geometry><material><ambient>0.576 0.584 0.576 1</ambient><diffuse>0.720 0.730 0.720 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="front_beam_20_c"><pose>40.800 -13.400 11.250 0.0000 0.0000 0.0000</pose><geometry><box><size>113.200 0.500 1.500</size></box></geometry></collision>
+        <visual name="canopy_21_v"><pose>40.800 -19.400 12.600 0.0000 0.0000 0.0000</pose><geometry><box><size>114.200 12.500 0.400</size></box></geometry><material><ambient>0.440 0.448 0.464 1</ambient><diffuse>0.550 0.560 0.580 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="canopy_column_22_v"><pose>-15.800 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_22_c"><pose>-15.800 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="canopy_column_23_v"><pose>3.067 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_23_c"><pose>3.067 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="canopy_column_24_v"><pose>21.933 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_24_c"><pose>21.933 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="canopy_column_25_v"><pose>40.800 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_25_c"><pose>40.800 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="canopy_column_26_v"><pose>59.667 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_26_c"><pose>59.667 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="canopy_column_27_v"><pose>78.533 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_27_c"><pose>78.533 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="canopy_column_28_v"><pose>97.400 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry><material><ambient>0.320 0.320 0.320 1</ambient><diffuse>0.400 0.400 0.400 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="canopy_column_28_c"><pose>97.400 -25.400 6.300 0.0000 0.0000 0.0000</pose><geometry><box><size>0.500 0.500 12.600</size></box></geometry></collision>
+        <visual name="apron_29_v"><geometry><mesh><uri>meshes/port_apron.obj</uri></mesh></geometry><material><diffuse>0.95 0.95 0.95 1</diffuse><specular>0.05 0.05 0.05 1</specular><pbr><metal><albedo_map>meshes/port_concrete.png</albedo_map><metalness>0.0</metalness><roughness>0.9</roughness></metal></pbr></material></visual>
+        <visual name="apron_shade_30_v"><pose>40.800 -19.400 0.003 0.0000 0.0000 0.0000</pose><geometry><box><size>113.200 12.000 0.004</size></box></geometry><material><ambient>0.400 0.400 0.392 1</ambient><diffuse>0.500 0.500 0.490 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="red_lane_31_v"><pose>50.000 -27.150 0.004 0.0000 0.0000 0.0000</pose><geometry><box><size>190.000 2.500 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="lane_edge_32_v"><pose>50.000 -25.975 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>190.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="lane_edge_33_v"><pose>50.000 -28.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>190.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_34_v"><pose>-43.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_35_v"><pose>-44.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_36_v"><pose>-44.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_37_v"><pose>-42.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_38_v"><pose>-37.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_39_v"><pose>-38.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_40_v"><pose>-38.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_41_v"><pose>-36.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_42_v"><pose>-31.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_43_v"><pose>-32.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_44_v"><pose>-32.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_45_v"><pose>-30.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_46_v"><pose>-25.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_47_v"><pose>-26.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_48_v"><pose>-26.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_49_v"><pose>-24.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_50_v"><pose>-19.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_51_v"><pose>-20.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_52_v"><pose>-20.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_53_v"><pose>-18.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_54_v"><pose>-13.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_55_v"><pose>-14.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_56_v"><pose>-14.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_57_v"><pose>-12.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_58_v"><pose>-7.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_59_v"><pose>-8.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_60_v"><pose>-8.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_61_v"><pose>-6.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_62_v"><pose>-1.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_63_v"><pose>-2.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_64_v"><pose>-2.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_65_v"><pose>-0.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_66_v"><pose>4.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_67_v"><pose>4.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_68_v"><pose>3.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_69_v"><pose>5.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_70_v"><pose>10.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_71_v"><pose>10.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_72_v"><pose>9.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_73_v"><pose>11.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_74_v"><pose>16.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_75_v"><pose>16.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_76_v"><pose>15.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_77_v"><pose>17.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_78_v"><pose>22.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_79_v"><pose>22.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_80_v"><pose>21.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_81_v"><pose>23.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_82_v"><pose>28.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_83_v"><pose>28.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_84_v"><pose>27.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_85_v"><pose>29.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_86_v"><pose>34.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_87_v"><pose>34.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_88_v"><pose>33.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_89_v"><pose>35.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_90_v"><pose>40.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_91_v"><pose>40.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_92_v"><pose>39.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_93_v"><pose>41.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_94_v"><pose>46.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_95_v"><pose>46.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_96_v"><pose>45.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_97_v"><pose>47.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_98_v"><pose>52.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_99_v"><pose>52.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_100_v"><pose>51.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_101_v"><pose>53.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_102_v"><pose>58.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_103_v"><pose>58.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_104_v"><pose>57.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_105_v"><pose>59.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_106_v"><pose>64.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_107_v"><pose>64.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_108_v"><pose>63.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_109_v"><pose>65.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_110_v"><pose>70.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_111_v"><pose>70.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_112_v"><pose>69.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_113_v"><pose>71.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_114_v"><pose>76.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_115_v"><pose>76.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_116_v"><pose>75.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_117_v"><pose>77.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_118_v"><pose>82.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_119_v"><pose>82.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_120_v"><pose>81.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_121_v"><pose>83.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_122_v"><pose>88.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_123_v"><pose>88.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_124_v"><pose>87.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_125_v"><pose>89.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_126_v"><pose>94.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_127_v"><pose>94.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_128_v"><pose>93.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_129_v"><pose>95.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_130_v"><pose>100.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_131_v"><pose>100.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_132_v"><pose>99.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_133_v"><pose>101.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_134_v"><pose>106.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_135_v"><pose>106.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_136_v"><pose>105.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_137_v"><pose>107.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_138_v"><pose>112.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_139_v"><pose>112.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_140_v"><pose>111.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_141_v"><pose>113.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_142_v"><pose>118.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_143_v"><pose>118.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_144_v"><pose>117.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_145_v"><pose>119.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_146_v"><pose>124.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_147_v"><pose>124.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_148_v"><pose>123.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_149_v"><pose>125.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_150_v"><pose>130.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_151_v"><pose>130.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_152_v"><pose>129.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_153_v"><pose>131.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_y_154_v"><pose>136.500 -41.325 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>3.000 0.150 0.004</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w_155_v"><pose>136.000 -52.300 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>2.000 0.200 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_r_156_v"><pose>135.750 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.560 0.176 0.160 1</ambient><diffuse>0.700 0.220 0.200 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="dash_w2_157_v"><pose>137.250 -35.275 0.005 0.0000 0.0000 0.0000</pose><geometry><box><size>1.500 0.250 0.004</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="quay_curb_158_v"><pose>50.000 -61.150 0.150 0.0000 0.0000 0.0000</pose><geometry><box><size>190.000 0.500 0.300</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="quay_curb_158_c"><pose>50.000 -61.150 0.150 0.0000 0.0000 0.0000</pose><geometry><box><size>190.000 0.500 0.300</size></box></geometry></collision>
+        <visual name="bollard_159_v"><pose>-40.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_159_c"><pose>-40.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_160_v"><pose>-40.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_160_c"><pose>-40.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_161_v"><pose>-25.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_161_c"><pose>-25.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_162_v"><pose>-25.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_162_c"><pose>-25.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_163_v"><pose>-10.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_163_c"><pose>-10.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_164_v"><pose>-10.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_164_c"><pose>-10.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_165_v"><pose>5.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_165_c"><pose>5.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_166_v"><pose>5.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_166_c"><pose>5.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_167_v"><pose>20.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_167_c"><pose>20.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_168_v"><pose>20.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_168_c"><pose>20.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_169_v"><pose>35.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_169_c"><pose>35.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_170_v"><pose>35.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_170_c"><pose>35.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_171_v"><pose>50.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_171_c"><pose>50.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_172_v"><pose>50.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_172_c"><pose>50.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_173_v"><pose>65.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_173_c"><pose>65.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_174_v"><pose>65.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_174_c"><pose>65.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_175_v"><pose>80.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_175_c"><pose>80.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_176_v"><pose>80.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_176_c"><pose>80.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_177_v"><pose>95.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_177_c"><pose>95.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_178_v"><pose>95.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_178_c"><pose>95.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_179_v"><pose>110.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_179_c"><pose>110.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_180_v"><pose>110.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_180_c"><pose>110.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_181_v"><pose>125.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_181_c"><pose>125.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_182_v"><pose>125.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_182_c"><pose>125.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="bollard_183_v"><pose>140.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry><material><ambient>0.064 0.064 0.064 1</ambient><diffuse>0.080 0.080 0.080 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_183_c"><pose>140.000 -60.200 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.300</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="bollard_cap_184_v"><pose>140.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="bollard_cap_184_c"><pose>140.000 -60.200 0.750 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.380</radius><length>0.120</length></cylinder></geometry></collision>
+        <visual name="water_185_v"><geometry><mesh><uri>meshes/port_water.obj</uri></mesh></geometry><material><diffuse>0.95 0.95 0.95 1</diffuse><specular>0.05 0.05 0.05 1</specular><pbr><metal><albedo_map>meshes/port_water.png</albedo_map><metalness>0.0</metalness><roughness>0.9</roughness></metal></pbr></material></visual>
+        <visual name="trees_186_v"><pose>60.000 -291.400 7.000 0.0000 0.0000 0.0000</pose><geometry><box><size>700.000 20.000 14.000</size></box></geometry><material><ambient>0.096 0.240 0.096 1</ambient><diffuse>0.120 0.300 0.120 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual>
+        <visual name="ship_187_v"><pose>55.650 -79.877 -1.000 1.5708 0 0.0000</pose><geometry><mesh><uri>models/ship_aaa/ship_aaa.obj</uri><scale>7.7000 7.7000 7.7000</scale></mesh></geometry></visual>
+        <collision name="ship_hull_188_c"><pose>60.000 -79.877 6.000 0 0 0.0000</pose><geometry><box><size>180.103 30.954 12.000</size></box></geometry></collision>
+        <visual name="truck_189_v"><pose>5.000 -47.400 0.000 1.5708 0.0000 1.5708</pose><geometry><mesh><uri>models/cargo_truck.glb</uri><scale>1.500 1.650 2.470</scale></mesh></geometry></visual>
+        <collision name="truck_189_c"><pose>5.000 -47.400 2.000 0 0 0.0000</pose><geometry><box><size>16.500 2.500 4.000</size></box></geometry></collision>
+        <visual name="truck_190_v"><pose>55.000 -46.400 0.000 1.5708 0.0000 1.5708</pose><geometry><mesh><uri>models/cargo_truck.glb</uri><scale>1.500 1.650 2.470</scale></mesh></geometry></visual>
+        <collision name="truck_190_c"><pose>55.000 -46.400 2.000 0 0 0.0000</pose><geometry><box><size>16.500 2.500 4.000</size></box></geometry></collision>
+        <visual name="cone_191_v"><pose>20.000 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_191_c"><pose>20.000 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_192_v"><pose>21.200 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_192_c"><pose>21.200 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_193_v"><pose>22.400 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_193_c"><pose>22.400 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_194_v"><pose>23.600 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_194_c"><pose>23.600 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_195_v"><pose>24.800 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_195_c"><pose>24.800 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_196_v"><pose>26.000 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_196_c"><pose>26.000 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_197_v"><pose>27.200 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_197_c"><pose>27.200 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_198_v"><pose>28.400 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_198_c"><pose>28.400 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_199_v"><pose>29.600 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_199_c"><pose>29.600 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="cone_200_v"><pose>30.800 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry><material><ambient>0.800 0.360 0.040 1</ambient><diffuse>1.000 0.450 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="cone_200_c"><pose>30.800 -29.400 0.350 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>0.700</length></cylinder></geometry></collision>
+        <visual name="sign_post_201_v"><pose>12.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_post_201_c"><pose>12.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry></collision>
+        <visual name="sign_202_v"><pose>12.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_202_c"><pose>12.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry></collision>
+        <visual name="sign_post_203_v"><pose>40.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_post_203_c"><pose>40.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry></collision>
+        <visual name="sign_204_v"><pose>40.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_204_c"><pose>40.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry></collision>
+        <visual name="sign_post_205_v"><pose>70.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_post_205_c"><pose>70.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry></collision>
+        <visual name="sign_206_v"><pose>70.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_206_c"><pose>70.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry></collision>
+        <visual name="sign_post_207_v"><pose>100.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_post_207_c"><pose>100.000 -29.900 0.600 0.0000 0.0000 0.0000</pose><geometry><box><size>0.060 0.060 1.200</size></box></geometry></collision>
+        <visual name="sign_208_v"><pose>100.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry><material><ambient>0.760 0.624 0.040 1</ambient><diffuse>0.950 0.780 0.050 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="sign_208_c"><pose>100.000 -29.900 1.350 0.0000 0.0000 0.0000</pose><geometry><box><size>1.000 0.040 0.500</size></box></geometry></collision>
+        <visual name="light_pole_209_v"><pose>-35.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_209_c"><pose>-35.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_210_v"><pose>-35.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+        <visual name="light_pole_211_v"><pose>-5.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_211_c"><pose>-5.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_212_v"><pose>-5.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+        <visual name="light_pole_213_v"><pose>25.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_213_c"><pose>25.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_214_v"><pose>25.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+        <visual name="light_pole_215_v"><pose>55.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_215_c"><pose>55.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_216_v"><pose>55.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+        <visual name="light_pole_217_v"><pose>85.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_217_c"><pose>85.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_218_v"><pose>85.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+        <visual name="light_pole_219_v"><pose>115.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_219_c"><pose>115.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_220_v"><pose>115.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+        <visual name="light_pole_221_v"><pose>145.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry><material><ambient>0.360 0.360 0.376 1</ambient><diffuse>0.450 0.450 0.470 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><collision name="light_pole_221_c"><pose>145.000 -31.400 10.000 0.0000 0.0000 0.0000</pose><geometry><cylinder><radius>0.180</radius><length>20.000</length></cylinder></geometry></collision>
+        <visual name="light_head_222_v"><pose>145.000 -31.400 20.200 0.0000 0.0000 0.0000</pose><geometry><box><size>1.600 0.800 0.400</size></box></geometry><material><ambient>0.760 0.760 0.760 1</ambient><diffuse>0.950 0.950 0.950 1</diffuse><specular>0.1 0.1 0.1 1</specular><emissive>0.47 0.47 0.47 1</emissive></material></visual>
+      </link>
+    </model>
+    <model name="pulp_dyn_0"><pose>10.473 -56.705 0.000 0 0 0</pose><link name="link"><inertial><pose>0 0 0.900 0 0 0</pose><mass>2000.0</mass><inertia><ixx>862.0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>688.8</iyy><iyz>0</iyz><izz>470.9</izz></inertia></inertial><collision name="c"><pose>0 0 0.900 0 0 0</pose><geometry><box><size>0.945 1.390 1.800</size></box></geometry><surface><friction><ode><mu>0.60</mu><mu2>0.60</mu2></ode></friction></surface></collision><visual name="v"><geometry><mesh><uri>models/pulp_unit/pulp_unit.obj</uri></mesh></geometry></visual></link></model>
+    <model name="pulp_dyn_1"><pose>12.418 -56.705 0.000 0 0 0</pose><link name="link"><inertial><pose>0 0 0.900 0 0 0</pose><mass>2000.0</mass><inertia><ixx>862.0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>688.8</iyy><iyz>0</iyz><izz>470.9</izz></inertia></inertial><collision name="c"><pose>0 0 0.900 0 0 0</pose><geometry><box><size>0.945 1.390 1.800</size></box></geometry><surface><friction><ode><mu>0.60</mu><mu2>0.60</mu2></ode></friction></surface></collision><visual name="v"><geometry><mesh><uri>models/pulp_unit/pulp_unit.obj</uri></mesh></geometry></visual></link></model>
+    <model name="pulp_dyn_2"><pose>14.363 -56.705 0.000 0 0 0</pose><link name="link"><inertial><pose>0 0 0.900 0 0 0</pose><mass>2000.0</mass><inertia><ixx>862.0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>688.8</iyy><iyz>0</iyz><izz>470.9</izz></inertia></inertial><collision name="c"><pose>0 0 0.900 0 0 0</pose><geometry><box><size>0.945 1.390 1.800</size></box></geometry><surface><friction><ode><mu>0.60</mu><mu2>0.60</mu2></ode></friction></surface></collision><visual name="v"><geometry><mesh><uri>models/pulp_unit/pulp_unit.obj</uri></mesh></geometry></visual></link></model>
+    <model name="pulp_dyn_3"><pose>16.307 -56.705 0.000 0 0 0</pose><link name="link"><inertial><pose>0 0 0.900 0 0 0</pose><mass>2000.0</mass><inertia><ixx>862.0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>688.8</iyy><iyz>0</iyz><izz>470.9</izz></inertia></inertial><collision name="c"><pose>0 0 0.900 0 0 0</pose><geometry><box><size>0.945 1.390 1.800</size></box></geometry><surface><friction><ode><mu>0.60</mu><mu2>0.60</mu2></ode></friction></surface></collision><visual name="v"><geometry><mesh><uri>models/pulp_unit/pulp_unit.obj</uri></mesh></geometry></visual></link></model>
+    <model name="pulp_dyn_4"><pose>18.252 -56.705 0.000 0 0 0</pose><link name="link"><inertial><pose>0 0 0.900 0 0 0</pose><mass>2000.0</mass><inertia><ixx>862.0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>688.8</iyy><iyz>0</iyz><izz>470.9</izz></inertia></inertial><collision name="c"><pose>0 0 0.900 0 0 0</pose><geometry><box><size>0.945 1.390 1.800</size></box></geometry><surface><friction><ode><mu>0.60</mu><mu2>0.60</mu2></ode></friction></surface></collision><visual name="v"><geometry><mesh><uri>models/pulp_unit/pulp_unit.obj</uri></mesh></geometry></visual></link></model>
+    <model name="pulp_dyn_5"><pose>20.197 -56.705 0.000 0 0 0</pose><link name="link"><inertial><pose>0 0 0.900 0 0 0</pose><mass>2000.0</mass><inertia><ixx>862.0</ixx><ixy>0</ixy><ixz>0</ixz><iyy>688.8</iyy><iyz>0</iyz><izz>470.9</izz></inertia></inertial><collision name="c"><pose>0 0 0.900 0 0 0</pose><geometry><box><size>0.945 1.390 1.800</size></box></geometry><surface><friction><ode><mu>0.60</mu><mu2>0.60</mu2></ode></friction></surface></collision><visual name="v"><geometry><mesh><uri>models/pulp_unit/pulp_unit.obj</uri></mesh></geometry></visual></link></model>
+  </world>
+</sdf>

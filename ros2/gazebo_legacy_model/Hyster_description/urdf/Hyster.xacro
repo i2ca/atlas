@@ -2,8 +2,15 @@
 <robot name="Hyster" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:include filename="$(find Hyster_description)/urdf/materials.xacro" />
-<xacro:include filename="$(find Hyster_description)/urdf/Hyster.trans" />
 <xacro:include filename="$(find Hyster_description)/urdf/Hyster.gazebo" />
+<link name="base_footprint"/>
+
+<joint name="base_footprint_joint" type="fixed">
+  <origin xyz="1.17 0 -2.865" rpy="0 0 1.5708"/>
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
+
 <link name="base_link">
   <inertial>
     <origin xyz="-0.0004925789832203201 2.4769998313137425 3.690590684581383" rpy="0 0 0"/>
@@ -15,7 +22,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="hyster_yellow"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -36,7 +43,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Base_das_garras_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="steel_grey"/>
   </visual>
   <collision>
     <origin xyz="-1.01632 -0.616947 -3.972451" rpy="0 0 0"/>
@@ -46,7 +53,7 @@
   </collision>
 </link>
 
-<link name="3._Frame_-_2_1">
+<link name="mast_inner">
   <inertial>
     <origin xyz="1.4162614780635594 -4.987760374523981 0.7954257791514321" rpy="0 0 0"/>
     <mass value="274.26551036234616"/>
@@ -57,7 +64,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/3._Frame_-_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="mast_black"/>
   </visual>
   <collision>
     <origin xyz="1.416773 -5.907135 -4.36998" rpy="0 0 0"/>
@@ -78,7 +85,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Frame_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="mast_black"/>
   </visual>
   <collision>
     <origin xyz="0.45175 -1.105433 -3.11971" rpy="0 0 0"/>
@@ -99,7 +106,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Base_deslizante_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="mast_black"/>
   </visual>
   <collision>
     <origin xyz="0.00118 -1.454932 -9.320984" rpy="0 0 0"/>
@@ -120,12 +127,12 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Left_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="tire_black"/>
   </visual>
   <collision>
-    <origin xyz="0.4705 -1.170433 -3.26971" rpy="0 0 0"/>
+    <origin xyz="-0.266 0 0" rpy="0 1.5708 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Left_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+      <cylinder radius="0.405" length="0.53"/>
     </geometry>
   </collision>
 </link>
@@ -141,12 +148,12 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Right_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="tire_black"/>
   </visual>
   <collision>
-    <origin xyz="-0.4705 -1.170433 -3.26971" rpy="0 0 0"/>
+    <origin xyz="0.266 0 0" rpy="0 1.5708 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Right_front_wheel_1.stl" scale="0.001 0.001 0.001"/>
+      <cylinder radius="0.405" length="0.53"/>
     </geometry>
   </collision>
 </link>
@@ -162,12 +169,12 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Left_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="tire_black"/>
   </visual>
   <collision>
-    <origin xyz="0.777 -3.405433 -3.26421" rpy="0 0 0"/>
+    <origin xyz="-0.1125 0 0" rpy="0 1.5708 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Left_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+      <cylinder radius="0.405" length="0.225"/>
     </geometry>
   </collision>
 </link>
@@ -183,17 +190,17 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Right_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="tire_black"/>
   </visual>
   <collision>
-    <origin xyz="-0.777 -3.405433 -3.26421" rpy="0 0 0"/>
+    <origin xyz="0.1125 0 0" rpy="0 1.5708 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Right_rear_wheel_1.stl" scale="0.001 0.001 0.001"/>
+      <cylinder radius="0.405" length="0.225"/>
     </geometry>
   </collision>
 </link>
 
-<link name="10.Right__Hub_1">
+<link name="right_hub">
   <inertial>
     <origin xyz="0.10676222612247532 -0.001134425302500297 -0.11416074168174717" rpy="0 0 0"/>
     <mass value="74.42878224447517"/>
@@ -204,7 +211,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/10.Right__Hub_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="dark_grey"/>
   </visual>
   <collision>
     <origin xyz="-0.607 -3.405433 -3.37921" rpy="0 0 0"/>
@@ -214,7 +221,7 @@
   </collision>
 </link>
 
-<link name="10._Left_Hub2_1">
+<link name="left_hub">
   <inertial>
     <origin xyz="-0.10676222612247543 -0.001134425302500297 -0.11416074168174717" rpy="0 0 0"/>
     <mass value="74.42878224447499"/>
@@ -225,7 +232,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/10._Left_Hub2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="dark_grey"/>
   </visual>
   <collision>
     <origin xyz="0.607 -3.405433 -3.37921" rpy="0 0 0"/>
@@ -246,12 +253,14 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Garra_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="steel_grey"/>
   </visual>
+  <!-- Flat pad instead of the STL: the mesh's inner face flares towards the tip
+       and wedges the load out when the clamp closes -->
   <collision>
-    <origin xyz="0.72609 -0.45169 -4.25807" rpy="0 0 0"/>
+    <origin xyz="0.04009 -0.77719 -0.65157" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Garra_1_1.stl" scale="0.001 0.001 0.001"/>
+      <box size="0.08 1.425 0.507"/>
     </geometry>
   </collision>
 </link>
@@ -267,17 +276,19 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/Garra_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="steel_grey"/>
   </visual>
+  <!-- Flat pad instead of the STL: the mesh's inner face flares towards the tip
+       and wedges the load out when the clamp closes -->
   <collision>
-    <origin xyz="-0.72391 -0.45169 -3.45807" rpy="0 0 0"/>
+    <origin xyz="-0.03991 -0.77719 0.14843" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find Hyster_description)/meshes/Garra_2_1.stl" scale="0.001 0.001 0.001"/>
+      <box size="0.08 1.425 0.507"/>
     </geometry>
   </collision>
 </link>
 
-<link name="13._Cylinder_-_1_1_2_1">
+<link name="right_tilt_cylinder">
   <inertial>
     <origin xyz="2.220446049250313e-16 -0.19411720247653874 0.13227000062779704" rpy="0 0 0"/>
     <mass value="21.72488855838382"/>
@@ -288,7 +299,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/13._Cylinder_-_1_1_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="chrome"/>
   </visual>
   <collision>
     <origin xyz="-0.527625 -1.425994 -3.935058" rpy="0 0 0"/>
@@ -298,7 +309,7 @@
   </collision>
 </link>
 
-<link name="15._Cylinder_-_1_1__1">
+<link name="left_tilt_cylinder">
   <inertial>
     <origin xyz="-1.1102230246251565e-16 -0.19411720247652253 0.13227000062782102" rpy="0 0 0"/>
     <mass value="21.72488855838382"/>
@@ -309,7 +320,7 @@
     <geometry>
       <mesh filename="file://$(find Hyster_description)/meshes/15._Cylinder_-_1_1__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
-    <material name="silver"/>
+    <material name="chrome"/>
   </visual>
   <collision>
     <origin xyz="0.527625 -1.425994 -3.935058" rpy="0 0 0"/>
@@ -319,108 +330,113 @@
   </collision>
 </link>
 
-<joint name="Rigid 3" type="fixed">
+<!-- Implement joints, driven by libhyster_joint_position.so. Positive values:
+     lift joints raise, clamp_base_joint shifts to the vehicle's left (+X of
+     base_link), clamp joints close. Mast tilt stays locked. -->
+<joint name="clamp_base_joint" type="prismatic">
   <origin xyz="1.0175 -0.837985 -5.348533" rpy="0 0 0"/>
   <parent link="Base_deslizante_1"/>
   <child link="Base_das_garras_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit lower="-0.3" upper="0.3" effort="100000" velocity="1.0"/>
 </joint>
 
-<joint name="Slider 4" type="prismatic">
+<joint name="mast_lift_joint" type="prismatic">
   <origin xyz="-0.965023 4.801702 1.25027" rpy="0 0 0"/>
   <parent link="Frame_1_1"/>
-  <child link="3._Frame_-_2_1"/>
-  <axis xyz="0.0 -0.0 1.0"/>
-  <limit upper="2.65" lower="-0.22" effort="100" velocity="100"/>
+  <child link="mast_inner"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit lower="0.0" upper="2.65" effort="300000" velocity="1.0"/>
 </joint>
 
-<joint name="Revolute 5" type="revolute">
+<joint name="mast_tilt_joint" type="fixed">
   <origin xyz="-0.45175 1.105433 3.11971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Frame_1_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
-  <limit upper="0.174533" lower="-0.087266" effort="100" velocity="100"/>
 </joint>
 
-<joint name="Slider 10" type="prismatic">
+<joint name="carriage_joint" type="prismatic">
   <origin xyz="1.415593 -4.452203 4.951004" rpy="0 0 0"/>
-  <parent link="3._Frame_-_2_1"/>
+  <parent link="mast_inner"/>
   <child link="Base_deslizante_1"/>
-  <axis xyz="-0.0 0.0 -1.0"/>
-  <limit upper="0.25" lower="-2.3" effort="100" velocity="100"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit lower="-0.25" upper="2.3" effort="300000" velocity="1.0"/>
 </joint>
 
-<joint name="Revolute 11" type="continuous">
+<joint name="clamp_1_joint" type="prismatic">
+  <origin xyz="-1.74241 -0.165257 0.285619" rpy="0 0 0"/>
+  <parent link="Base_das_garras_1"/>
+  <child link="Garra_1_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit lower="0.0" upper="0.45" effort="100000" velocity="1.0"/>
+</joint>
+
+<joint name="clamp_2_joint" type="prismatic">
+  <origin xyz="-0.29241 -0.165257 -0.514381" rpy="0 0 0"/>
+  <parent link="Base_das_garras_1"/>
+  <child link="Garra_2_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit lower="0.0" upper="0.45" effort="100000" velocity="1.0"/>
+</joint>
+
+<joint name="right_tilt_cylinder_joint" type="fixed">
+  <origin xyz="0.527625 1.425994 3.935058" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_tilt_cylinder"/>
+</joint>
+
+<joint name="left_tilt_cylinder_joint" type="fixed">
+  <origin xyz="-0.527625 1.425994 3.935058" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_tilt_cylinder"/>
+</joint>
+
+<!-- Wheels: all axes along +X so positive velocity drives towards the clamps (-Y of base_link) -->
+<joint name="left_front_wheel_joint" type="continuous">
   <origin xyz="-0.4705 1.170433 3.26971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Left_front_wheel_1"/>
   <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolute 12" type="continuous">
+<joint name="right_front_wheel_joint" type="continuous">
   <origin xyz="0.4705 1.170433 3.26971" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="Right_front_wheel_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
+  <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolute 13" type="continuous">
+<joint name="left_rear_wheel_joint" type="continuous">
   <origin xyz="-0.17 0.0 -0.115" rpy="0 0 0"/>
-  <parent link="10._Left_Hub2_1"/>
+  <parent link="left_hub"/>
   <child link="Left_rear_wheel_1"/>
-  <axis xyz="-1.0 0.0 -0.0"/>
+  <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolute 16" type="continuous">
+<joint name="right_rear_wheel_joint" type="continuous">
   <origin xyz="0.17 0.0 -0.115" rpy="0 0 0"/>
-  <parent link="10.Right__Hub_1"/>
+  <parent link="right_hub"/>
   <child link="Right_rear_wheel_1"/>
-  <axis xyz="1.0 -0.0 0.0"/>
+  <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="Revolute 35" type="revolute">
+<!-- Rear steering: axis is -Z so the ackermann plugin's front-steer geometry holds for a rear-steered vehicle -->
+<joint name="right_hub_steer_joint" type="revolute">
   <origin xyz="0.607 3.405433 3.37921" rpy="0 0 0"/>
   <parent link="base_link"/>
-  <child link="10.Right__Hub_1"/>
-  <axis xyz="0.0 0.0 1.0"/>
-  <limit upper="0.349066" lower="-0.261799" effort="100" velocity="100"/>
+  <child link="right_hub"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit upper="0.6" lower="-0.6" effort="100000" velocity="100"/>
+  <dynamics damping="50"/>
 </joint>
 
-<joint name="Revolute 36" type="revolute">
+<joint name="left_hub_steer_joint" type="revolute">
   <origin xyz="-0.607 3.405433 3.37921" rpy="0 0 0"/>
   <parent link="base_link"/>
-  <child link="10._Left_Hub2_1"/>
-  <axis xyz="0.0 0.0 1.0"/>
-  <limit upper="0.261799" lower="-0.349066" effort="100" velocity="100"/>
-</joint>
-
-<joint name="Slider 41" type="prismatic">
-  <origin xyz="-1.74241 -0.165257 0.285619" rpy="0 0 0"/>
-  <parent link="Base_das_garras_1"/>
-  <child link="Garra_1_1"/>
-  <axis xyz="-1.0 -0.0 0.0"/>
-  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
-</joint>
-
-<joint name="Slider 42" type="prismatic">
-  <origin xyz="-0.29241 -0.165257 -0.514381" rpy="0 0 0"/>
-  <parent link="Base_das_garras_1"/>
-  <child link="Garra_2_1"/>
-  <axis xyz="-1.0 -0.0 0.0"/>
-  <limit upper="0.0" lower="0.0" effort="100" velocity="100"/>
-</joint>
-
-<joint name="Revolute 50" type="continuous">
-  <origin xyz="0.527625 1.425994 3.935058" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="13._Cylinder_-_1_1_2_1"/>
-  <axis xyz="-1.0 0.0 0.0"/>
-</joint>
-
-<joint name="Revolute 52" type="continuous">
-  <origin xyz="-0.527625 1.425994 3.935058" rpy="0 0 0"/>
-  <parent link="base_link"/>
-  <child link="15._Cylinder_-_1_1__1"/>
-  <axis xyz="1.0 0.0 0.0"/>
+  <child link="left_hub"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit upper="0.6" lower="-0.6" effort="100000" velocity="100"/>
+  <dynamics damping="50"/>
 </joint>
 
 </robot>

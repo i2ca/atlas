@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<robot name="Hyster" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<!-- Colors taken from photos of the real Hyster forklift -->
+<xacro:property name="hyster_yellow_rgba" value="0.950 0.660 0.000 1.000" />
+<xacro:property name="mast_black_rgba" value="0.100 0.100 0.100 1.000" />
+<xacro:property name="steel_grey_rgba" value="0.550 0.530 0.500 1.000" />
+<xacro:property name="tire_black_rgba" value="0.050 0.050 0.050 1.000" />
+<xacro:property name="dark_grey_rgba" value="0.200 0.200 0.200 1.000" />
+<xacro:property name="chrome_rgba" value="0.800 0.800 0.820 1.000" />
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<material name="hyster_yellow">
+  <color rgba="${hyster_yellow_rgba}"/>
+</material>
+
+<material name="mast_black">
+  <color rgba="${mast_black_rgba}"/>
+</material>
+
+<material name="steel_grey">
+  <color rgba="${steel_grey_rgba}"/>
+</material>
+
+<material name="tire_black">
+  <color rgba="${tire_black_rgba}"/>
+</material>
+
+<material name="dark_grey">
+  <color rgba="${dark_grey_rgba}"/>
+</material>
+
+<material name="chrome">
+  <color rgba="${chrome_rgba}"/>
+</material>
+
+</robot>

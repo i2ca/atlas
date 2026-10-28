@@ -1,0 +1,14 @@
+# colcon
+build/
+install/
+log/
+__pycache__/
+*.pyc
+
+# O .gitignore da raiz do atlas ignora *.obj (objeto de C++). Aqui .obj sao MALHAS 3D dos mundos: sem elas o
+# Gazebo nao carrega o mundo (URI nao resolvido e' erro fatal).
+!*.obj
+
+# Navio "Ship AAA": licenca nao confirmada (algumas texturas sao de banco de imagens). Fica so' local; sem ele o
+# sim.launch.py tira o visual e o porto sobe sem navio. Ver src/forklift_sim/worlds/models/LEIA-ME.txt
+src/forklift_sim/worlds/models/ship_aaa/

@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<robot name="Hyster" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<!-- Cor visual (vale no Gazebo Classic e no gz sim); RGBA vem do materials.xacro.
+     Os plugins do Gazebo Classic foram removidos nesta copia do forklift_sim_ws:
+     no gz sim o controle e o gz_ros2_control do pacote forklift_sim. -->
+<xacro:macro name="gazebo_color" params="rgba">
+  <visual>
+    <material>
+      <ambient>${rgba}</ambient>
+      <diffuse>${rgba}</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+    </material>
+  </visual>
+</xacro:macro>
+<gazebo reference="base_link">
+  <xacro:gazebo_color rgba="${hyster_yellow_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="Base_das_garras_1">
+  <xacro:gazebo_color rgba="${steel_grey_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="mast_inner">
+  <xacro:gazebo_color rgba="${mast_black_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="Frame_1_1">
+  <xacro:gazebo_color rgba="${mast_black_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="Base_deslizante_1">
+  <xacro:gazebo_color rgba="${mast_black_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="Left_front_wheel_1">
+  <xacro:gazebo_color rgba="${tire_black_rgba}"/>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+</gazebo>
+
+<gazebo reference="Right_front_wheel_1">
+  <xacro:gazebo_color rgba="${tire_black_rgba}"/>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+</gazebo>
+
+<gazebo reference="Left_rear_wheel_1">
+  <xacro:gazebo_color rgba="${tire_black_rgba}"/>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+</gazebo>
+
+<gazebo reference="Right_rear_wheel_1">
+  <xacro:gazebo_color rgba="${tire_black_rgba}"/>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+</gazebo>
+
+<gazebo reference="right_hub">
+  <xacro:gazebo_color rgba="${dark_grey_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="left_hub">
+  <xacro:gazebo_color rgba="${dark_grey_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="Garra_1_1">
+  <xacro:gazebo_color rgba="${steel_grey_rgba}"/>
+  <mu1>1.5</mu1>
+  <mu2>1.5</mu2>
+</gazebo>
+
+<gazebo reference="Garra_2_1">
+  <xacro:gazebo_color rgba="${steel_grey_rgba}"/>
+  <mu1>1.5</mu1>
+  <mu2>1.5</mu2>
+</gazebo>
+
+<gazebo reference="right_tilt_cylinder">
+  <xacro:gazebo_color rgba="${chrome_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+<gazebo reference="left_tilt_cylinder">
+  <xacro:gazebo_color rgba="${chrome_rgba}"/>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+</gazebo>
+
+</robot>

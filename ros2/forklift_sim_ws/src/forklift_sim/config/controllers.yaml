@@ -1,0 +1,29 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    mast_controller:
+      type: forward_command_controller/ForwardCommandController
+    steer_controller:
+      type: forward_command_controller/ForwardCommandController
+    drive_controller:
+      type: forward_command_controller/ForwardCommandController
+
+# Ordem dos comandos = ordem de "joints" (o can_bridge publica nessa ordem)
+mast_controller:
+  ros__parameters:
+    joints: ["carriage_joint", "mast_lift_joint", "clamp_base_joint", "clamp_1_joint", "clamp_2_joint"]
+    interface_name: position
+
+steer_controller:
+  ros__parameters:
+    joints: ["left_hub_steer_joint", "right_hub_steer_joint"]
+    interface_name: position
+
+drive_controller:
+  ros__parameters:
+    joints: ["left_front_wheel_joint", "right_front_wheel_joint"]
+    interface_name: velocity

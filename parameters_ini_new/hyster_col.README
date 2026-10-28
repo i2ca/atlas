@@ -1,0 +1,5 @@
+hyster_col.txt -- modelo de colisao da Hyster do simulador (formato do ford_escape_col.txt:
+n_circulos, max_h_level, depois "x y raio nivel" no referencial do carro do astro).
+Gerado da caixa do models/hyster.obj: x -2,79 a 2,21 m (garra na frente), largura 2,09 m.
+5 circulos de raio 1,05 m. Usado pelo robot_collision_file do astro.ini e, por ele, pelo
+pointcloud_node do SC-LIO-SAM para tirar a propria empilhadeira da nuvem.

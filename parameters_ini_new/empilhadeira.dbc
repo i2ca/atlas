@@ -1,0 +1,235 @@
+VERSION ""
+
+BS_:
+
+BU_: DRIVER MOTOR VCU GARRA INTERCEPT GAZEBO
+
+
+# =====================================================================
+# EMPILHADEIRA (J1939) -- RASCUNHO: LEITURA + COMANDO DA GARRA
+# Gerado em 2026-10-16 a partir do dicionario do CanAnalyzer
+# (~/Documents/CanAnalyzer/dicionario.json) e da gravacao de 14/10 14:40.
+#
+# O motor so' aceita aceleracao (TSC1) da VCU (endereco 0x27), o pedal e' por
+# fio, a troca de marcha nao funciona pelo CAN e a direcao nao aparece no
+# barramento. Esses vao por interceptacao eletrica: uma placa no CAN (endereco
+# 0xF0) recebe acelerador/freio/marcha do vehicle_driver e devolve a chave
+# autonomo/manual. Os frames dela estao marcados [SIM]: hoje so' o
+# forklift_can_simulator implementa; os IDs sao propostos, a confirmar na placa.
+#
+# Convencoes:
+#  - IDs J1939 sao estendidos (29 bits): no DBC levam o bit 31 ligado
+#    (0x0CF00400 -> 0x8CF00400), igual ao 0x8000022C do outro DBC.
+#  - Byte n do J1939 (conta a partir de 1) comeca no bit (n-1)*8.
+#  - Grupos (nome da mensagem):
+#      read  -> sinais que o vehicle_driver le' (Velocity, Gear, RPM, ManualOverride,
+#               SteeringAngle)
+#      monitor -> o vehicle_driver ignora; ficam para consulta/diagnostico
+#      write -> vehicle_driver (modo DBC): ThrottleEffort, BrakesEffort, Gear, ParkingBrake
+#               forklift_driver: garra, emulando o joystick 0xEC (veja o aviso no fim)
+#    Os dois programas carregam este mesmo arquivo; cada um so' manda os frames
+#    dos sinais que ele preenche (FrameBatch envia so' frames tocados).
+#  - [C] confirmado nas gravacoes, [P] provavel, [H] hipotese.
+# =====================================================================
+
+
+#################### READ (vehicle_driver) ####################
+
+# [P] CCVS (PGN 65265) da VCU, 10 Hz -- Wheel-Based Vehicle Speed (SPN 84)
+#     bytes 2-3, 1/256 km/h por bit -> em m/s: 0.00390625 / 3.6
+#     SEM SINAL: na re' continua positiva. Por isso nao se chama "Velocity": o
+#     vehicle_driver no modo DBC le' o Velocity sem aplicar o sentido da marcha (a
+#     odometria sairia positiva na re'). O Velocity com sinal vem da placa (18FF51F0).
+BO_ 0x98FEF127 read: 8 VCU
+ SG_ CCVSSpeed : 8|16@1+ (0.001085069,0) [0|20] "m/s" DRIVER
+ SG_ ParkingBrake : 2|2@1+ (1,0) [0|3] "" DRIVER
+
+# [C] ETC2 (PGN 61445) da VCU, 10 Hz -- Current Gear (SPN 523), byte 4
+#     bruto 126 = frente, 125 = neutro, 124 = re (fisico = bruto - 125).
+#     O VAL_ usa o valor BRUTO; os nomes sao os que o vehicle_driver entende.
+BO_ 0x98F00527 read: 8 VCU
+ SG_ Gear : 24|8@1+ (1,0) [0|255] "" DRIVER
+ SG_ SelectedGear : 0|8@1+ (1,-125) [-125|125] "" DRIVER
+VAL_ 0x98F00527 Gear 126 "gear_1" 125 "neutral" 124 "reverse_1" 251 "park" ;
+
+# [C] EEC1 (PGN 61444) do motor, 50 Hz -- Engine Speed (SPN 190), bytes 4-5
+BO_ 0x8CF00400 read: 8 MOTOR
+ SG_ RPM : 24|16@1+ (0.125,0) [0|8031.875] "rpm" DRIVER
+ SG_ EngineTorque : 16|8@1+ (1,-125) [-125|125] "%" DRIVER
+
+
+# [SIM] placa de interceptacao -> astro, 50 Hz: chave e angulo da direcao
+#     ManualOverride 1 = o motorista assumiu, 0 = o computador de bordo comanda
+#     (convencao do vehicle_driver). SafeStop 1 = parada de seguranca.
+#     SteeringAngle: angulo de direcao equivalente (phi do astro, rad, + = vira a
+#     esquerda). A empilhadeira esterça atras; o sensor da placa ja' entrega o phi.
+#     Velocity: velocidade COM SINAL (negativa na re'), o que o vehicle_driver precisa.
+BO_ 0x98FF51F0 read: 8 INTERCEPT
+ SG_ ManualOverride : 0|1@1+ (1,0) [0|1] "" DRIVER
+ SG_ SafeStop : 1|1@1+ (1,0) [0|1] "" DRIVER
+ SG_ SteeringAngle : 16|16@1- (0.0001,0) [-3.2768|3.2767] "rad" DRIVER
+ SG_ Velocity : 32|16@1- (0.001,0) [-32.768|32.767] "m/s" DRIVER
+
+
+#################### MONITOR (vehicle_driver ignora) ####################
+
+# [C] EEC2 (PGN 61443) do motor, 20 Hz -- pedal (por fio) e carga
+BO_ 0x8CF00300 monitor: 8 MOTOR
+ SG_ AcceleratorPedal : 8|8@1+ (0.4,0) [0|100] "%" DRIVER
+ SG_ EngineLoad : 16|8@1+ (1,0) [0|125] "%" DRIVER
+
+# [C] EBC1 (PGN 61441) da VCU, 10 Hz -- Brake Pedal Position (SPN 521), byte 2
+BO_ 0x98F00127 monitor: 8 VCU
+ SG_ BrakePedal : 8|8@1+ (0.4,0) [0|100] "%" DRIVER
+
+# [P] EEC3 (PGN 65247) do motor, 4 Hz -- Engine Desired Operating Speed (SPN 515)
+#     E' o alvo que o motor segue: com TSC1 aceito ela acompanha o pedido.
+BO_ 0x98FEDF00 monitor: 8 MOTOR
+ SG_ DesiredRPM : 8|16@1+ (0.125,0) [0|8031.875] "rpm" DRIVER
+
+# [C] ET1 (PGN 65262) do motor, 1 Hz
+BO_ 0x98FEEE00 monitor: 8 MOTOR
+ SG_ CoolantTemp : 0|8@1+ (1,-40) [-40|210] "degC" DRIVER
+ SG_ OilTemp : 16|16@1+ (0.03125,-273) [-273|1735] "degC" DRIVER
+
+# [C] EFL/P1 (PGN 65263) do motor, 2 Hz
+BO_ 0x98FEEF00 monitor: 8 MOTOR
+ SG_ OilPressure : 24|8@1+ (4,0) [0|1000] "kPa" DRIVER
+
+# [C] LFE1 (PGN 65266) do motor, 10 Hz
+BO_ 0x98FEF200 monitor: 8 MOTOR
+ SG_ FuelRate : 0|16@1+ (0.05,0) [0|3212.75] "L/h" DRIVER
+
+# [C] VEP1 (PGN 65271) do motor, 1 Hz
+BO_ 0x98FEF700 monitor: 8 MOTOR
+ SG_ BatteryVoltage : 32|16@1+ (0.05,0) [0|3212.75] "V" DRIVER
+ SG_ KeyswitchVoltage : 48|16@1+ (0.05,0) [0|3212.75] "V" DRIVER
+
+# [P] TRF1 (PGN 65272) da VCU, 1 Hz -- Transmission Oil Temperature (SPN 177)
+BO_ 0x98FEF827 monitor: 8 VCU
+ SG_ TransmissionOilTemp : 32|16@1+ (0.03125,-273) [-273|1735] "degC" DRIVER
+
+# [C] DM1 (PGN 65226) da VCU, 1 Hz -- 1a falha ativa (SPN 2236 = garra)
+BO_ 0x98FECA27 monitor: 8 VCU
+ SG_ DM1_SPN : 16|16@1+ (1,0) [0|65535] "" DRIVER
+ SG_ DM1_FMI : 32|5@1+ (1,0) [0|31] "" DRIVER
+
+# [P] 18FF1027 (proprietaria) da VCU, 50 Hz
+BO_ 0x98FF1027 monitor: 8 VCU
+ SG_ GarraDesconectada : 34|1@1+ (1,0) [0|1] "" DRIVER
+ SG_ AlertaPiscante : 62|1@1+ (1,0) [0|1] "" DRIVER
+
+
+#################### WRITE: vehicle_driver -> placa de interceptacao [SIM] ####################
+#
+# Nomes que o vehicle_driver (modo DBC, bin/ford_escape_hybrid_dbc) preenche sozinho,
+# a cada ciclo: ThrottleEffort e BrakesEffort em % (0..100), SteeringEffort em %
+# (-100..100, saida do PID de direcao) e Gear como texto
+# ("drive"/"neutral"/"reverse"). ParkingBrake (1 puxa, 2 solta) so' quando muda e em
+# autonomo. A empilhadeira so' tem marcha 1, 0 e -1: o neutro (0) so' existe com o
+# freio de mao puxado; solto, ela fica em 1 ou -1. E so' anda com o acelerador acima
+# de ~10 %.
+BO_ 0x98FF50F0 write: 8 DRIVER
+ SG_ ThrottleEffort : 0|16@1+ (0.1,0) [0|100] "%" INTERCEPT
+ SG_ BrakesEffort : 16|16@1+ (0.1,0) [0|100] "%" INTERCEPT
+ SG_ Gear : 32|8@1+ (1,0) [0|255] "" INTERCEPT
+ SG_ ParkingBrake : 40|2@1+ (1,0) [0|3] "" INTERCEPT
+ SG_ AutonomousLight : 42|2@1+ (1,0) [0|3] "" INTERCEPT
+ SG_ SteeringEffort : 48|16@1- (0.01,0) [-100|100] "%" INTERCEPT
+VAL_ 0x98FF50F0 Gear 126 "drive" 125 "neutral" 124 "reverse" ;
+
+
+#################### [SIM] OPERADOR E GAZEBO (so' simulacao) ####################
+#
+# Grupos proprios: o vehicle_driver e o forklift_driver nao conhecem estes nomes.
+
+# [SIM] joystick do operador (forklift_gui -> forklift_can_simulator), 20 Hz: comando de BAIXO NIVEL,
+#     como o ojTorc (esforcos direto no veiculo, sem o vehicle_driver). OpTakeover 1 = o operador assumiu
+#     (a placa de interceptacao passa a ManualOverride 1 e o vehicle_driver fica de fora); 0 = devolve.
+#     OpParkingBrake: 1 puxa, 2 solta, 0 mantem. OpSteering: angulo de direcao pedido (phi, + = esquerda).
+BO_ 0x98FF52F0 operator: 8 DRIVER
+ SG_ OpTakeover : 0|2@1+ (1,0) [0|1] "" INTERCEPT
+ SG_ OpParkingBrake : 2|2@1+ (1,0) [0|2] "" INTERCEPT
+ SG_ OpDirection : 8|8@1+ (1,0) [0|255] "" INTERCEPT
+ SG_ OpThrottle : 16|16@1+ (0.1,0) [0|100] "%" INTERCEPT
+ SG_ OpBrake : 32|16@1+ (0.1,0) [0|100] "%" INTERCEPT
+ SG_ OpSteering : 48|16@1- (0.0001,0) [-3.2768|3.2767] "rad" INTERCEPT
+VAL_ 0x98FF52F0 OpDirection 126 "drive" 125 "neutral" 124 "reverse" ;
+
+# [SIM] Gazebo (can_bridge) -> forklift_can_simulator, 20 Hz: a empilhadeira encostou num obstaculo.
+#     BlockedForward/BlockedReverse 1 = nao anda naquele sentido; MeasuredVelocity: a do Gazebo (m/s reais).
+BO_ 0x98FF53FE gazebo: 8 GAZEBO
+ SG_ BlockedForward : 0|1@1+ (1,0) [0|1] "" INTERCEPT
+ SG_ BlockedReverse : 1|1@1+ (1,0) [0|1] "" INTERCEPT
+ SG_ MeasuredVelocity : 16|16@1- (0.001,0) [-32.768|32.767] "m/s" INTERCEPT
+
+
+#################### WRITE: GARRA (emula o joystick 0xEC) ####################
+#
+# A garra NAO tem feedback de posicao: o que o joystick manda e' o COMANDO da
+# acao (deflexao da alavanca), e a VCU move a garra enquanto ele durar. Por isso
+# estes sinais ficam no grupo "write".
+#
+# Conferido em 16/10 contra:
+#  - o encodeAxis do CanAnalyzer (src/core/CommandProfile.cpp:462), que ja'
+#    comandou a garra pelos perfis salvos;
+#  - a gravacao de 08/10 16:19 com o joystick real: eixos de -1000 a +1000 e so'
+#    os status 01 (neutro), 04 (sentido -) e 10 (sentido +).
+#
+# Cada eixo usa 2 bytes (padrao joystick J1939). Para um comando c em -100..100 %:
+#   c == 0 : Neutral=1, Negative=0, Positive=0, Lever=0
+#   c <  0 : Neutral=0, Negative=1, Positive=0, Lever=|c|
+#   c >  0 : Neutral=0, Negative=0, Positive=1, Lever=c
+# (Lever em %, resolucao 0.1 %; bruto 0..1000.) Em repouso o frame e'
+# "01 00 01 00 01 00 01 00". O vehicle_driver NAO conhece estes nomes: quem
+# manda a garra e' o forklift_driver (src/forklift_driver).
+#
+# Para mandar, o joystick original tem que estar DESCONECTADO (mesmo ID: dois
+# nos colidem, como no TSC1). Desconectado, a VCU confere:
+#   - 0CFFC0EC a 10 Hz sem buraco > 300 ms (o CanAnalyzer manda a cada 40 ms);
+#   - 0CFFC1EC presente (100 ms) com os bytes fixos abaixo;
+#   - DM1 do 0xEC (18FECAEC) a cada 1 s, sem falha.
+# O mesmo ID nao pode estar em dois grupos: com o joystick real ligado, leia
+# estes frames pelo grupo "write" mesmo (read_signal aceita qualquer grupo).
+
+# [C] eixos (PGN 65472) -- mandar a cada 40 ms
+BO_ 0x8CFFC0EC write: 8 DRIVER
+ SG_ GarraPot1Neutral : 0|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot1Negative : 2|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot1Positive : 4|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot1Lever : 6|10@1+ (0.1,0) [0|100] "%" GARRA
+ SG_ GarraPot2Neutral : 16|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot2Negative : 18|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot2Positive : 20|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot2Lever : 22|10@1+ (0.1,0) [0|100] "%" GARRA
+ SG_ GarraPot3Neutral : 32|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot3Negative : 34|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot3Positive : 36|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot3Lever : 38|10@1+ (0.1,0) [0|100] "%" GARRA
+ SG_ GarraPot4Neutral : 48|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot4Negative : 50|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot4Positive : 52|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraPot4Lever : 54|10@1+ (0.1,0) [0|100] "%" GARRA
+
+# [C] botao (PGN 65473) -- mandar a cada 100 ms
+#     byte 1 bits 7-8: 01 = pressionado ("40 FF FF FF 3F FF 66 68"), 00 = solto.
+#     Os bytes 2-8 nunca mudaram nas gravacoes; o frame tem que sair com eles:
+#     GarraButtonFixA = 0xFFFFFF (16777215), FixB = 0x3F (63), FixC = 0xFF (255),
+#     FixD = 0x6866 (26726, bytes "66 68").
+BO_ 0x8CFFC1EC write: 8 DRIVER
+ SG_ GarraButton : 6|2@1+ (1,0) [0|1] "" GARRA
+ SG_ GarraButtonFixA : 8|24@1+ (1,0) [0|16777215] "" GARRA
+ SG_ GarraButtonFixB : 32|8@1+ (1,0) [0|255] "" GARRA
+ SG_ GarraButtonFixC : 40|8@1+ (1,0) [0|255] "" GARRA
+ SG_ GarraButtonFixD : 48|16@1+ (1,0) [0|65535] "" GARRA
+VAL_ 0x8CFFC1EC GarraButton 1 "pressed" 0 "released" ;
+
+# [C] DM1 do joystick (PGN 65226) -- mandar a cada 1 s, sem falha:
+#     "00 FF 00 00 00 00 FF FF" (lampadas apagadas, nenhum SPN).
+#     Valores: Lamps = 0, LampFlash = 255, SPN = 0, FMI_OC = 0, Pad = 65535.
+BO_ 0x98FECAEC write: 8 DRIVER
+ SG_ GarraDM1Lamps : 0|8@1+ (1,0) [0|255] "" GARRA
+ SG_ GarraDM1LampFlash : 8|8@1+ (1,0) [0|255] "" GARRA
+ SG_ GarraDM1SPN : 16|16@1+ (1,0) [0|65535] "" GARRA
+ SG_ GarraDM1FMI_OC : 32|16@1+ (1,0) [0|65535] "" GARRA
+ SG_ GarraDM1Pad : 48|16@1+ (1,0) [0|65535] "" GARRA
